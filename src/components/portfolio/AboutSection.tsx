@@ -99,9 +99,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ settings }) => {
             <div className="bg-surface-container-lowest p-4 md:p-space-md rounded-3xl shadow-[0_24px_48px_-10px_rgba(8,8,8,0.08)] border border-outline-variant/40 flex flex-col">
               <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-surface-container">
                 <img
-                  alt="Minimalist stylish modern 3D clay and realistic render portrait of Abdullah"
+                  alt={designerName ? `${designerName} - Creative Studio Portrait` : 'Creative Studio Portrait'}
                   className="w-full h-full object-cover"
-                  src="/assets/portrait.png"
+                  src={settings?.avatar_url || '/assets/portrait.png'}
                 />
                 <div className="absolute bottom-3 right-3 bg-surface-container-lowest/85 backdrop-blur-md px-space-sm py-1 rounded-full flex items-center gap-1.5 shadow-sm border border-outline-variant/30">
                   <span className="w-2 h-2 rounded-full bg-primary-container animate-pulse" />

@@ -13,6 +13,13 @@ export const INITIAL_SITE_SETTINGS: SiteSettings = {
   availability_status: 'Independent Practice • Available for Q2/Q3 Projects',
   contact_email: 'abdullahgorib22@gmail.com',
   location: 'Dhaka / Remote',
+  avatar_url: '/assets/portrait.png',
+  toolkit: [
+    { name: 'Photoshop', icon: 'auto_fix_high' },
+    { name: 'Illustrator', icon: 'draw' },
+    { name: 'Figma', icon: 'dashboard_customize' },
+    { name: 'After Effects', icon: 'animation' },
+  ],
   social_links: [
     { platform: 'Behance', url: 'https://www.behance.net/happycrust' },
     { platform: 'Dribbble', url: 'https://dribbble.com' },

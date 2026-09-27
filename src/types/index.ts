@@ -42,6 +42,12 @@ export interface Inquiry {
   updated_at?: string;
 }
 
+export interface ToolItem {
+  id?: string;
+  name: string;
+  icon: string;
+}
+
 export interface SiteSettings {
   id: string;
   site_name: string;
@@ -55,6 +61,8 @@ export interface SiteSettings {
   availability_status: string;
   contact_email: string;
   location: string;
+  avatar_url?: string;
+  toolkit?: ToolItem[];
   social_links: { platform: string; url: string }[];
   services_list: {
     id: string;

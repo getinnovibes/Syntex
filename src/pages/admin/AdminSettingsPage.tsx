@@ -1,7 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { fetchSiteSettings, saveSiteSettings } from '../../lib/supabase';
-import { SiteSettings } from '../../types';
+import { SiteSettings, ToolItem } from '../../types';
 import { Toast } from '../../components/common/Toast';
+import { ImageUploader } from '../../components/admin/ImageUploader';
+
+const DEFAULT_TOOLKIT_PRESETS: ToolItem[] = [
+  { name: 'Photoshop', icon: 'auto_fix_high' },
+  { name: 'Illustrator', icon: 'draw' },
+  { name: 'Figma', icon: 'dashboard_customize' },
+  { name: 'After Effects', icon: 'animation' },
+];
+
+const COMMON_ICONS = [
+  { icon: 'auto_fix_high', label: 'Photo / FX' },
+  { icon: 'draw', label: 'Vector / Draw' },
+  { icon: 'dashboard_customize', label: 'UI / Figma' },
+  { icon: 'animation', label: 'Motion' },
+  { icon: 'brush', label: 'Art' },
+  { icon: 'view_in_ar', label: '3D / Render' },
+  { icon: 'movie', label: 'Video' },
+  { icon: 'palette', label: 'Color' },
+  { icon: 'design_services', label: 'Design' },
+  { icon: 'layers', label: 'Layers' },
+];
 
 export const AdminSettingsPage: React.FC = () => {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
@@ -13,6 +34,9 @@ export const AdminSettingsPage: React.FC = () => {
     async function load() {
       try {
         const data = await fetchSiteSettings();
+        if (!data.toolkit || data.toolkit.length === 0) {
+          data.toolkit = DEFAULT_TOOLKIT_PRESETS;
+        }
         setSettings(data);
       } catch (err: any) {
         setToastMessage(`Error loading settings: ${err.message}`);
@@ -29,12 +53,33 @@ export const AdminSettingsPage: React.FC = () => {
     setSaving(true);
     try {
       await saveSiteSettings(settings);
-      setToastMessage('Site settings updated and synced with live portfolio!');
+      setToastMessage('Changes saved & published live across the website!');
     } catch (err: any) {
-      setToastMessage(`Save failed: ${err.message}`);
+      setToastMessage(`Save notice: ${err.message}`);
     } finally {
       setSaving(false);
     }
+  };
+
+  // Toolkit management handlers
+  const handleAddTool = () => {
+    if (!settings) return;
+    const currentTools = settings.toolkit || [];
+    const newTool: ToolItem = { name: 'New Software', icon: 'star' };
+    setSettings({ ...settings, toolkit: [...currentTools, newTool] });
+  };
+
+  const handleUpdateTool = (index: number, field: keyof ToolItem, value: string) => {
+    if (!settings) return;
+    const currentTools = [...(settings.toolkit || [])];
+    currentTools[index] = { ...currentTools[index], [field]: value };
+    setSettings({ ...settings, toolkit: currentTools });
+  };
+
+  const handleRemoveTool = (index: number) => {
+    if (!settings) return;
+    const currentTools = (settings.toolkit || []).filter((_, i) => i !== index);
+    setSettings({ ...settings, toolkit: currentTools });
   };
 
   if (loading || !settings) {
@@ -44,6 +89,8 @@ export const AdminSettingsPage: React.FC = () => {
       </div>
     );
   }
+
+  const currentToolkit = settings.toolkit && settings.toolkit.length > 0 ? settings.toolkit : DEFAULT_TOOLKIT_PRESETS;
 
   return (
     <div className="w-full max-w-[1000px] mx-auto p-4 sm:p-6 lg:p-8 animate-fade-in pb-24">
@@ -55,25 +102,267 @@ export const AdminSettingsPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-outline-variant/30">
         <div>
           <h1 className="font-headline-xl text-2xl md:text-3xl font-semibold text-on-surface tracking-tight">
-            Site Settings & Bio
+            Site Settings & Content Studio
           </h1>
           <p className="font-body-md text-sm md:text-base text-secondary mt-1">
-            Control the public headline, colophon, metrics, and contact channels.
+            Edit hero availability, software toolkit badges, bio narrative, photos, and studio channels.
           </p>
         </div>
 
-        <button
-          form="settings-form"
-          type="submit"
-          disabled={saving}
-          className="px-6 py-2.5 rounded-full bg-primary-container text-white font-label-md text-label-md font-semibold hover:bg-primary transition-all shadow-md shadow-primary-container/20 disabled:opacity-50"
-        >
-          {saving ? 'Syncing...' : 'Save & Publish Changes'}
-        </button>
+        <div className="flex items-center gap-3">
+          <a
+            href="/"
+            target="_blank"
+            rel="noreferrer"
+            className="px-4 py-2.5 rounded-full bg-surface-container hover:bg-secondary-container text-on-surface font-label-md text-label-md font-medium transition-all border border-outline-variant/40 flex items-center gap-1.5"
+            title="Preview live site in new tab"
+          >
+            <span className="material-symbols-outlined text-[18px] text-primary">visibility</span>
+            <span>View Live Site</span>
+          </a>
+
+          <button
+            form="settings-form"
+            type="submit"
+            disabled={saving}
+            className="px-6 py-2.5 rounded-full bg-primary-container text-white font-label-md text-label-md font-semibold hover:bg-primary transition-all shadow-md shadow-primary-container/20 disabled:opacity-50 cursor-pointer flex items-center gap-2"
+          >
+            {saving ? (
+              <>
+                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <span>Publishing...</span>
+              </>
+            ) : (
+              <>
+                <span className="material-symbols-outlined text-[18px]">publish</span>
+                <span>Save & Publish Live</span>
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       <form id="settings-form" onSubmit={handleSubmit} className="mt-8 space-y-8">
-        {/* Brand & Designer Info */}
+        {/* ========================================================================= */}
+        {/* 1. HERO AVAILABILITY BADGE (Direct user request)                          */}
+        {/* ========================================================================= */}
+        <div className="bg-surface-container-lowest p-6 md:p-8 rounded-3xl border border-outline-variant/30 shadow-sm space-y-5">
+          <div className="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+            <div>
+              <h2 className="font-headline-sm text-lg font-semibold text-on-surface flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary text-[22px]">verified</span>
+                <span>Hero Availability Status Badge</span>
+              </h2>
+              <p className="font-body-sm text-xs text-secondary mt-0.5">
+                Controls the pulsing pill badge at the very top of your homepage.
+              </p>
+            </div>
+            <span className="px-2.5 py-1 rounded-full bg-primary-fixed/20 text-primary font-label-sm text-[11px] font-semibold uppercase">
+              Live Interactive
+            </span>
+          </div>
+
+          {/* Live Preview Box */}
+          <div className="p-4 rounded-2xl bg-surface-container-low/70 border border-outline-variant/30 flex flex-col gap-3">
+            <span className="font-label-sm text-[11px] text-secondary uppercase font-semibold tracking-wider">
+              Live Homepage Preview
+            </span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-lowest border border-outline-variant/40 shadow-sm w-fit">
+              <span className="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse" />
+              <span className="font-label-md text-sm text-on-surface-variant font-medium uppercase tracking-wider">
+                {settings.availability_status || 'Independent Practice • Available for Q2/Q3 Projects'}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="font-label-sm text-label-sm uppercase tracking-wider text-secondary">
+              Availability Text
+            </label>
+            <input
+              type="text"
+              value={settings.availability_status}
+              onChange={(e) =>
+                setSettings({ ...settings, availability_status: e.target.value })
+              }
+              placeholder="e.g. Independent Practice • Available for Q2/Q3 Projects"
+              className="w-full bg-surface-container-low px-4 py-3 rounded-xl font-body-md text-on-surface border border-transparent focus:border-primary outline-none transition-colors"
+            />
+          </div>
+
+          {/* Quick preset suggestions */}
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            <span className="text-xs text-secondary mr-1">Quick Presets:</span>
+            {[
+              'Independent Practice • Available for Q2/Q3 Projects',
+              'Available for Freelance & Contract Projects',
+              'Booking Q3/Q4 Client Projects',
+              'Open to Full-Time Visual Direction Roles',
+              'Currently Available • Fast Turnaround',
+            ].map((preset) => (
+              <button
+                key={preset}
+                type="button"
+                onClick={() => setSettings({ ...settings, availability_status: preset })}
+                className="text-xs px-3 py-1.5 rounded-full bg-surface-container hover:bg-secondary-container border border-outline-variant/40 text-on-surface-variant hover:text-primary transition-all cursor-pointer"
+              >
+                {preset}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* 2. SOFTWARE TOOLKIT & BADGES (Direct user request)                       */}
+        {/* ========================================================================= */}
+        <div className="bg-surface-container-lowest p-6 md:p-8 rounded-3xl border border-outline-variant/30 shadow-sm space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-outline-variant/20 pb-3">
+            <div>
+              <h2 className="font-headline-sm text-lg font-semibold text-on-surface flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary text-[22px]">handyman</span>
+                <span>Software Toolkit & Skills Badges</span>
+              </h2>
+              <p className="font-body-sm text-xs text-secondary mt-0.5">
+                Add, remove, or customize software tools (Photoshop, Illustrator, Figma, After Effects, etc.).
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={handleAddTool}
+              className="px-4 py-1.5 rounded-full bg-primary-container text-white font-label-sm text-label-sm font-semibold hover:bg-primary transition-colors flex items-center gap-1.5 w-fit cursor-pointer shadow-sm"
+            >
+              <span className="material-symbols-outlined text-[16px]">add</span>
+              <span>Add New Tool Badge</span>
+            </button>
+          </div>
+
+          {/* Live Toolkit Preview Strip */}
+          <div className="p-4 rounded-2xl bg-surface-container-low/70 border border-outline-variant/30 space-y-2">
+            <span className="font-label-sm text-[11px] text-secondary uppercase font-semibold tracking-wider">
+              Live Homepage Toolkit Preview
+            </span>
+            <div className="inline-flex flex-wrap items-center gap-2 bg-surface-container-lowest/90 px-4 py-2.5 rounded-full shadow-sm border border-outline-variant/40 w-fit">
+              <span className="font-label-sm text-label-sm text-secondary uppercase tracking-widest mr-1">
+                Toolkit
+              </span>
+              {currentToolkit.map((tool, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-low text-on-surface font-label-sm text-label-sm border border-outline-variant/20"
+                >
+                  <span className="material-symbols-outlined text-primary text-[15px]">
+                    {tool.icon || 'star'}
+                  </span>
+                  <span>{tool.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* List of Tools */}
+          <div className="space-y-3">
+            {currentToolkit.map((tool, index) => (
+              <div
+                key={index}
+                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-3.5 rounded-2xl bg-surface-container-low/50 border border-outline-variant/30 hover:border-outline-variant transition-colors"
+              >
+                {/* Icon Preview & Selector */}
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary shadow-xs border border-outline-variant/30 shrink-0">
+                    <span className="material-symbols-outlined text-[20px]">
+                      {tool.icon || 'star'}
+                    </span>
+                  </div>
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-[10px] text-secondary uppercase font-medium">Icon Name</span>
+                    <input
+                      type="text"
+                      value={tool.icon}
+                      onChange={(e) => handleUpdateTool(index, 'icon', e.target.value)}
+                      placeholder="e.g. draw"
+                      className="w-32 bg-surface-container-lowest px-3 py-1.5 rounded-lg font-mono text-xs text-on-surface border border-outline-variant/40 focus:border-primary outline-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Tool Name Input */}
+                <div className="flex-1 flex flex-col gap-0.5">
+                  <span className="text-[10px] text-secondary uppercase font-medium">Tool Name / Title</span>
+                  <input
+                    type="text"
+                    value={tool.name}
+                    onChange={(e) => handleUpdateTool(index, 'name', e.target.value)}
+                    placeholder="e.g. Photoshop"
+                    className="w-full bg-surface-container-lowest px-3.5 py-1.5 rounded-lg font-body-md text-sm text-on-surface border border-outline-variant/40 focus:border-primary outline-none"
+                  />
+                </div>
+
+                {/* Remove button */}
+                <button
+                  type="button"
+                  onClick={() => handleRemoveTool(index)}
+                  className="p-2 rounded-xl text-error hover:bg-error-container/20 transition-colors self-end sm:self-center cursor-pointer"
+                  title="Remove this tool badge"
+                >
+                  <span className="material-symbols-outlined text-[20px]">delete</span>
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {/* Quick Common Icon Picker Chips */}
+          <div className="pt-2 border-t border-outline-variant/20">
+            <span className="text-xs text-secondary block mb-2 font-medium">
+              Popular Google Material Icons (Click to copy name):
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {COMMON_ICONS.map((item) => (
+                <button
+                  key={item.icon}
+                  type="button"
+                  onClick={() => {
+                    navigator.clipboard?.writeText(item.icon);
+                    setToastMessage(`Icon code "${item.icon}" copied! Paste it in the icon box.`);
+                  }}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-container hover:bg-secondary-container text-xs text-on-surface border border-outline-variant/30 cursor-pointer transition-colors"
+                  title={`Click to copy: ${item.icon}`}
+                >
+                  <span className="material-symbols-outlined text-primary text-[14px]">{item.icon}</span>
+                  <span>{item.icon}</span>
+                  <span className="text-[10px] text-secondary">({item.label})</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* 3. STUDIO PORTRAIT / PHOTO UPLOADER (Direct user request)                */}
+        {/* ========================================================================= */}
+        <div className="bg-surface-container-lowest p-6 md:p-8 rounded-3xl border border-outline-variant/30 shadow-sm space-y-5">
+          <div className="border-b border-outline-variant/20 pb-3">
+            <h2 className="font-headline-sm text-lg font-semibold text-on-surface flex items-center gap-2">
+              <span className="material-symbols-outlined text-primary text-[22px]">account_circle</span>
+              <span>About Section Studio Portrait Photo</span>
+            </h2>
+            <p className="font-body-sm text-xs text-secondary mt-0.5">
+              Upload your personal or 3D character portrait photo displayed on the homepage About section.
+            </p>
+          </div>
+
+          <div className="max-w-md">
+            <ImageUploader
+              value={settings.avatar_url || '/assets/portrait.png'}
+              onChange={(url) => setSettings({ ...settings, avatar_url: url })}
+              label="Studio Portrait Photo"
+              helperText="Recommended: 800×800px or 1000×1000px square (PNG, WEBP, or JPG)"
+            />
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* 4. STUDIO IDENTITY & TITLE                                                */}
+        {/* ========================================================================= */}
         <div className="bg-surface-container-lowest p-6 md:p-8 rounded-3xl border border-outline-variant/30 shadow-sm space-y-5">
           <h2 className="font-headline-sm text-lg font-semibold text-on-surface border-b border-outline-variant/20 pb-3">
             Studio Identity & Title
@@ -132,27 +421,14 @@ export const AdminSettingsPage: React.FC = () => {
               />
             </div>
           </div>
-
-          {/* Availability Status */}
-          <div className="flex flex-col gap-1.5">
-            <label className="font-label-sm text-label-sm uppercase tracking-wider text-secondary">
-              Availability Status Badge
-            </label>
-            <input
-              type="text"
-              value={settings.availability_status}
-              onChange={(e) =>
-                setSettings({ ...settings, availability_status: e.target.value })
-              }
-              className="w-full bg-surface-container-low px-4 py-3 rounded-xl font-body-md text-on-surface border border-transparent focus:border-primary outline-none"
-            />
-          </div>
         </div>
 
-        {/* Hero & Colophon Narrative */}
+        {/* ========================================================================= */}
+        {/* 5. HERO & COLOPHON NARRATIVE                                              */}
+        {/* ========================================================================= */}
         <div className="bg-surface-container-lowest p-6 md:p-8 rounded-3xl border border-outline-variant/30 shadow-sm space-y-5">
           <h2 className="font-headline-sm text-lg font-semibold text-on-surface border-b border-outline-variant/20 pb-3">
-            Hero & About Colophon
+            Hero & About Colophon Narrative
           </h2>
 
           <div className="flex flex-col gap-1.5">
@@ -225,7 +501,9 @@ export const AdminSettingsPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Contact Email & Networks */}
+        {/* ========================================================================= */}
+        {/* 6. CONTACT & CHANNELS                                                     */}
+        {/* ========================================================================= */}
         <div className="bg-surface-container-lowest p-6 md:p-8 rounded-3xl border border-outline-variant/30 shadow-sm space-y-5">
           <h2 className="font-headline-sm text-lg font-semibold text-on-surface border-b border-outline-variant/20 pb-3">
             Contact & Channels

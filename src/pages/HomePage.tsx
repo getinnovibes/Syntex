@@ -31,6 +31,18 @@ export const HomePage: React.FC = () => {
       }
     }
     loadData();
+
+    // Listen to real-time custom updates & cross-tab storage changes
+    const handleUpdate = () => {
+      loadData();
+    };
+
+    window.addEventListener('syntax_data_updated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+    return () => {
+      window.removeEventListener('syntax_data_updated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
   }, []);
 
   return (
@@ -41,6 +53,8 @@ export const HomePage: React.FC = () => {
           headline={settings?.headline}
           bio={settings?.bio}
           availabilityStatus={settings?.availability_status}
+          toolkit={settings?.toolkit}
+          featuredProjects={projects.filter((p) => p.featured)}
         />
 
         <AboutSection settings={settings || undefined} />

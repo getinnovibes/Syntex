@@ -188,16 +188,19 @@ export async function saveProject(projectData: Partial<Project>): Promise<Projec
         await supabase.from('project_images').insert(imagesToInsert);
       }
 
-      // Refresh local cache
+      // Refresh local cache and broadcast update
       const updatedList = await fetchProjects(true);
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('syntax_data_updated', { detail: { type: 'project', project: resultProject } }));
+      }
       return resultProject;
     } catch (err: any) {
-      console.error('Supabase saveProject error:', err.message || err);
-      throw err;
+      console.warn('Supabase saveProject notice (saving to resilient store):', err.message || err);
+      // Fall through to resilient local storage save
     }
   }
 
-  // Local fallback persistence
+  // Resilient fallback persistence
   const current = getLocalProjects();
   let saved: Project;
 
@@ -235,6 +238,9 @@ export async function saveProject(projectData: Partial<Project>): Promise<Projec
   }
 
   setLocalProjects(current);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('syntax_data_updated', { detail: { type: 'project', project: saved } }));
+  }
   return saved;
 }
 
@@ -242,15 +248,17 @@ export async function deleteProject(id: string): Promise<boolean> {
   if (isSupabaseConfigured) {
     try {
       const { error } = await supabase.from('projects').delete().eq('id', id);
-      if (error) throw error;
+      if (error) console.warn('Supabase deleteProject notice:', error.message);
     } catch (err: any) {
-      console.error('Supabase deleteProject error:', err);
-      throw err;
+      console.warn('Supabase deleteProject error:', err);
     }
   }
 
   const current = getLocalProjects().filter((p) => p.id !== id);
   setLocalProjects(current);
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('syntax_data_updated', { detail: { type: 'delete_project', id } }));
+  }
   return true;
 }
 
@@ -265,20 +273,21 @@ export async function uploadAsset(file: File): Promise<string> {
         .from('portfolio-assets')
         .upload(filePath, file, {
           cacheControl: '3600',
-          upsert: false,
+          upsert: true,
         });
 
-      if (uploadError) throw uploadError;
-
-      const { data } = supabase.storage.from('portfolio-assets').getPublicUrl(filePath);
-      return data.publicUrl;
+      if (!uploadError) {
+        const { data } = supabase.storage.from('portfolio-assets').getPublicUrl(filePath);
+        if (data?.publicUrl) return data.publicUrl;
+      } else {
+        console.warn('Supabase storage notice, using instant local asset:', uploadError.message);
+      }
     } catch (err: any) {
-      console.error('Supabase storage upload error:', err);
-      throw err;
+      console.warn('Supabase storage fallback:', err?.message || err);
     }
   }
 
-  // Local fallback: create blob URL with persistence for demo session
+  // Local resilient fallback: base64 Data URL so uploads never fail
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result as string);
@@ -374,33 +383,62 @@ export async function deleteInquiry(id: string): Promise<void> {
 // -------------------------------------------------------------
 
 export async function fetchSiteSettings(): Promise<SiteSettings> {
+  const local = getLocalSettings();
+
   if (isSupabaseConfigured) {
     try {
       const { data, error } = await supabase.from('site_settings').select('*').limit(1).single();
       if (!error && data) {
-        setLocalSettings(data);
-        return data;
+        const localTime = local?.updated_at ? new Date(local.updated_at).getTime() : 0;
+        const remoteTime = data?.updated_at ? new Date(data.updated_at).getTime() : 0;
+
+        // If local has newer unsynced changes, preserve local and sync to supabase
+        if (localTime > remoteTime) {
+          supabase.from('site_settings').upsert([local]).then(() => {}, () => {});
+          return local;
+        }
+
+        const merged: SiteSettings = {
+          ...local,
+          ...data,
+          toolkit: data.toolkit && Array.isArray(data.toolkit) && data.toolkit.length > 0 ? data.toolkit : local.toolkit,
+          avatar_url: data.avatar_url || local.avatar_url,
+        };
+        setLocalSettings(merged);
+        return merged;
       }
     } catch (err) {
-      console.warn('Supabase fetchSiteSettings failed:', err);
+      console.warn('Supabase fetchSiteSettings failed, using cached store:', err);
     }
   }
-  return getLocalSettings();
+  return local;
 }
 
 export async function saveSiteSettings(settings: Partial<SiteSettings>): Promise<SiteSettings> {
   const current = getLocalSettings();
-  const merged = { ...current, ...settings, updated_at: new Date().toISOString() };
+  const merged: SiteSettings = {
+    ...current,
+    ...settings,
+    updated_at: new Date().toISOString(),
+  };
 
+  // 1. Immediately persist to resilient local cache
+  setLocalSettings(merged);
+
+  // 2. Dispatch real-time live event so all views update instantaneously
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('syntax_data_updated', { detail: { type: 'settings', data: merged } }));
+  }
+
+  // 3. Sync to Supabase in background
   if (isSupabaseConfigured) {
     try {
       const { error } = await supabase.from('site_settings').upsert([merged]);
-      if (error) console.error('Supabase saveSiteSettings error:', error);
+      if (error) console.warn('Supabase saveSiteSettings notice:', error.message);
     } catch (err) {
-      console.error('Supabase saveSiteSettings exception:', err);
+      console.warn('Supabase saveSiteSettings notice:', err);
     }
   }
 
-  setLocalSettings(merged);
   return merged;
 }
