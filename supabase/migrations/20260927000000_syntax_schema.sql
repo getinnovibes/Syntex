@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS public.site_settings (
   contact_email TEXT NOT NULL DEFAULT 'abdullah.graphics@syntax.design',
   location TEXT NOT NULL DEFAULT 'Dhaka / Remote',
   social_links JSONB NOT NULL DEFAULT '[
-    {"platform": "Behance", "url": "https://behance.net"},
+    {"platform": "Behance", "url": "https://www.behance.net/happycrust"},
     {"platform": "Dribbble", "url": "https://dribbble.com"},
     {"platform": "LinkedIn", "url": "https://linkedin.com"},
     {"platform": "Instagram", "url": "https://instagram.com"},
