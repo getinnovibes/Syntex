@@ -2,8 +2,12 @@ import { createClient } from '@supabase/supabase-js';
 import { Project, Inquiry, SiteSettings, UserProfile } from '../types';
 import { INITIAL_PROJECTS, INITIAL_INQUIRIES, INITIAL_SITE_SETTINGS } from './initialData';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+const supabaseUrl =
+  import.meta.env.VITE_SUPABASE_URL || 'https://qxljhpxlhzociikxlxqs.supabase.co';
+
+const supabaseAnonKey =
+  import.meta.env.VITE_SUPABASE_ANON_KEY ||
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF4bGpocHhsaHpvY2lpa3hseHFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA1MjM0MDMsImV4cCI6MjEwNjA5OTQwM30.x6mc57NUQrcSmE9rnZ6g5sUHEyLlSBFSRtomt1RNQFU';
 
 export const isSupabaseConfigured = Boolean(
   supabaseUrl &&
