@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<'home' | 'about' | 'services' | 'portfolio' | 'contact'>('home');
   const location = useLocation();
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   const isHome = location.pathname === '/';
 
@@ -147,19 +145,8 @@ export const Header: React.FC = () => {
           </button>
         </nav>
 
-        {/* Action Controls & CMS Link */}
+        {/* Action Controls */}
         <div className="flex items-center gap-3">
-          <Link
-            to="/admin"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-outline-variant/60 bg-surface-container-lowest/80 text-on-surface hover:border-primary/50 hover:bg-secondary-container/40 transition-all font-label-sm text-label-sm"
-            title={user ? 'Admin Dashboard' : 'Admin Login'}
-          >
-            <span className="material-symbols-outlined text-[16px] text-primary">
-              {user ? 'admin_panel_settings' : 'lock'}
-            </span>
-            <span>{user ? 'Dashboard' : 'CMS'}</span>
-          </Link>
-
           <button
             onClick={() => navigateToSection('contact-section')}
             className="inline-flex items-center justify-center px-5 md:px-space-lg py-2.5 bg-primary-container text-on-primary font-headline-sm text-headline-sm rounded-full shadow-[0_12px_28px_-6px_rgba(108,59,255,0.28)] hover:bg-primary transition-all duration-200 active:scale-95 cursor-pointer"
@@ -214,15 +201,6 @@ export const Header: React.FC = () => {
             >
               Contact
             </button>
-            <div className="h-px bg-outline-variant/40 my-1" />
-            <Link
-              to="/admin"
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-4 py-2.5 rounded-xl flex items-center justify-between text-primary font-medium bg-surface-container-low"
-            >
-              <span>{user ? 'Admin Dashboard' : 'Admin CMS Portal'}</span>
-              <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
-            </Link>
           </div>
         </div>
       )}

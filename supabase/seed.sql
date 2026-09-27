@@ -25,7 +25,7 @@ INSERT INTO public.site_settings (
   '120+',
   '99%',
   'Independent Practice • Available for Q2/Q3 Projects',
-  'abdullah.graphics@syntax.design',
+  'abdullahgorib22@gmail.com',
   'Dhaka / Remote'
 ) ON CONFLICT (id) DO NOTHING;
 

@@ -6,7 +6,7 @@ interface ContactSectionProps {
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({
-  contactEmail = 'abdullah.graphics@syntax.design',
+  contactEmail = 'abdullahgorib22@gmail.com',
 }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -127,9 +127,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <span className="font-label-sm text-label-sm text-secondary uppercase tracking-wider">
                     Direct Inbox
                   </span>
-                  <p className="font-headline-sm text-base md:text-headline-sm text-on-surface font-medium truncate">
+                  <a
+                    href={`mailto:${contactEmail}`}
+                    className="font-headline-sm text-base md:text-headline-sm text-on-surface hover:text-primary transition-colors font-medium truncate block"
+                  >
                     {contactEmail}
-                  </p>
+                  </a>
                 </div>
               </div>
             </div>

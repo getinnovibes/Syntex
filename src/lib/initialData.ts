@@ -11,7 +11,7 @@ export const INITIAL_SITE_SETTINGS: SiteSettings = {
   completed_works: '120+',
   satisfaction_rate: '99%',
   availability_status: 'Independent Practice • Available for Q2/Q3 Projects',
-  contact_email: 'abdullah.graphics@syntax.design',
+  contact_email: 'abdullahgorib22@gmail.com',
   location: 'Dhaka / Remote',
   social_links: [
     { platform: 'Behance', url: 'https://www.behance.net/happycrust' },
