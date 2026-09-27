@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { fetchSiteSettings, saveSiteSettings } from '../../lib/supabase';
-import { SiteSettings, ToolItem } from '../../types';
+import { fetchSiteSettings, saveSiteSettings, fetchProjects, saveProject, deleteProject } from '../../lib/supabase';
+import { SiteSettings, ToolItem, Project } from '../../types';
 import { Toast } from '../../components/common/Toast';
 import { ImageUploader } from '../../components/admin/ImageUploader';
 
@@ -26,6 +26,7 @@ const COMMON_ICONS = [
 
 export const AdminSettingsPage: React.FC = () => {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -33,13 +34,19 @@ export const AdminSettingsPage: React.FC = () => {
   useEffect(() => {
     async function load() {
       try {
-        const data = await fetchSiteSettings();
-        if (!data.toolkit || data.toolkit.length === 0) {
-          data.toolkit = DEFAULT_TOOLKIT_PRESETS;
+        const [settingsData, projectsData] = await Promise.all([
+          fetchSiteSettings(),
+          fetchProjects(true),
+        ]);
+
+        if (!settingsData.toolkit || settingsData.toolkit.length === 0) {
+          settingsData.toolkit = DEFAULT_TOOLKIT_PRESETS;
         }
-        setSettings(data);
+
+        setSettings(settingsData);
+        setProjects(projectsData);
       } catch (err: any) {
-        setToastMessage(`Error loading settings: ${err.message}`);
+        setToastMessage(`Error loading data: ${err.message}`);
       } finally {
         setLoading(false);
       }
@@ -82,6 +89,43 @@ export const AdminSettingsPage: React.FC = () => {
     setSettings({ ...settings, toolkit: currentTools });
   };
 
+  // Carousel Project handlers
+  const handleAddCarouselSlide = async () => {
+    const newSlideData: Partial<Project> = {
+      title: 'New Showcase Project',
+      slug: `showcase-${Date.now().toString(36)}`,
+      category: 'Brand Identity',
+      short_description: 'Visual identity system and creative direction presentation.',
+      full_description: 'Detailed showcase project created for the 3D perspective carousel.',
+      cover_image: '/assets/aura-stationery.png',
+      featured: true,
+      published: true,
+      year: new Date().getFullYear().toString(),
+      role: 'Creative Director & Designer',
+      client: 'Studio Client',
+      tags: ['Design', 'Showcase', 'Creative'],
+    };
+
+    try {
+      const saved = await saveProject(newSlideData);
+      setProjects((prev) => [...prev, saved]);
+      setToastMessage('New slide added to 3D carousel!');
+    } catch (err: any) {
+      setToastMessage(`Could not add slide: ${err.message}`);
+    }
+  };
+
+  const handleDeleteCarouselSlide = async (id: string, title: string) => {
+    if (!window.confirm(`Are you sure you want to remove "${title}" from the carousel?`)) return;
+    try {
+      await deleteProject(id);
+      setProjects((prev) => prev.filter((p) => p.id !== id));
+      setToastMessage(`Slide "${title}" removed successfully.`);
+    } catch (err: any) {
+      setToastMessage(`Error deleting slide: ${err.message}`);
+    }
+  };
+
   if (loading || !settings) {
     return (
       <div className="p-8 flex items-center justify-center">
@@ -102,10 +146,10 @@ export const AdminSettingsPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-outline-variant/30">
         <div>
           <h1 className="font-headline-xl text-2xl md:text-3xl font-semibold text-on-surface tracking-tight">
-            Site Settings & Content Studio
+            Site Settings & Visual Content Studio
           </h1>
           <p className="font-body-md text-sm md:text-base text-secondary mt-1">
-            Edit hero availability, software toolkit badges, bio narrative, photos, and studio channels.
+            Edit hero availability, software toolkit badges, 3D carousel photos, bio narrative, and photos.
           </p>
         </div>
 
@@ -337,7 +381,181 @@ export const AdminSettingsPage: React.FC = () => {
         </div>
 
         {/* ========================================================================= */}
-        {/* 3. STUDIO PORTRAIT / PHOTO UPLOADER (Direct user request)                */}
+        {/* 3. 3D PERSPECTIVE CAROUSEL PHOTOS & SLIDES (Direct user request)          */}
+        {/* ========================================================================= */}
+        <div className="bg-surface-container-lowest p-6 md:p-8 rounded-3xl border border-outline-variant/30 shadow-sm space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-outline-variant/20 pb-4">
+            <div>
+              <h2 className="font-headline-sm text-lg font-semibold text-on-surface flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary text-[22px]">view_carousel</span>
+                <span>3D Perspective Carousel Photos & Slides</span>
+              </h2>
+              <p className="font-body-sm text-xs text-secondary mt-0.5">
+                Upload photos, change titles, and manage each slide shown in the 3D Perspective Carousel on your homepage.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={handleAddCarouselSlide}
+              className="px-4 py-2 rounded-full bg-primary-container text-white font-label-sm text-label-sm font-semibold hover:bg-primary transition-colors flex items-center gap-1.5 w-fit cursor-pointer shadow-sm shrink-0"
+            >
+              <span className="material-symbols-outlined text-[16px]">add_photo_alternate</span>
+              <span>+ Add New Carousel Slide</span>
+            </button>
+          </div>
+
+          {/* Carousel Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {projects.map((proj, idx) => (
+              <div
+                key={proj.id}
+                className="p-5 rounded-2xl bg-surface-container-low/60 border border-outline-variant/40 space-y-4 hover:border-primary/40 transition-all flex flex-col justify-between"
+              >
+                <div className="space-y-3">
+                  {/* Header: Slide Number & Status */}
+                  <div className="flex items-center justify-between">
+                    <span className="px-2.5 py-0.5 rounded-full bg-secondary-container text-primary font-label-sm text-[11px] font-bold uppercase tracking-wider">
+                      Slide 0{idx + 1}
+                    </span>
+                    <div className="flex items-center gap-3">
+                      <label className="flex items-center gap-1.5 text-xs text-secondary cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={proj.published}
+                          onChange={async (e) => {
+                            const updated = { ...proj, published: e.target.checked };
+                            setProjects((prev) => prev.map((p) => (p.id === proj.id ? updated : p)));
+                            await saveProject(updated);
+                            setToastMessage(`Slide "${proj.title}" published status updated!`);
+                          }}
+                          className="accent-primary rounded w-3.5 h-3.5 cursor-pointer"
+                        />
+                        <span>Active</span>
+                      </label>
+
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteCarouselSlide(proj.id, proj.title)}
+                        className="text-error hover:text-error/80 p-1 transition-colors cursor-pointer"
+                        title="Delete this slide"
+                      >
+                        <span className="material-symbols-outlined text-[18px]">delete</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Photo Uploader */}
+                  <ImageUploader
+                    value={proj.cover_image}
+                    onChange={async (url) => {
+                      const updated = { ...proj, cover_image: url };
+                      setProjects((prev) => prev.map((p) => (p.id === proj.id ? updated : p)));
+                      await saveProject(updated);
+                      setToastMessage(`Photo updated live for "${proj.title}"!`);
+                    }}
+                    label={`Slide 0${idx + 1} Photo`}
+                    helperText="Upload or change this slide's photo. Recommended: 1600×1000px"
+                  />
+
+                  {/* Title & Category inputs */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                    <div className="flex flex-col gap-1">
+                      <label className="text-[11px] uppercase tracking-wider text-secondary font-medium">
+                        Slide Title
+                      </label>
+                      <input
+                        type="text"
+                        value={proj.title}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setProjects((prev) =>
+                            prev.map((p) => (p.id === proj.id ? { ...p, title: val } : p))
+                          );
+                        }}
+                        onBlur={async () => {
+                          const current = projects.find((p) => p.id === proj.id);
+                          if (current) {
+                            await saveProject(current);
+                            setToastMessage(`Title saved for "${current.title}"!`);
+                          }
+                        }}
+                        placeholder="e.g. Synthesis Exhibition"
+                        className="bg-surface-container-lowest px-3 py-2 rounded-xl text-sm font-medium text-on-surface border border-outline-variant/40 focus:border-primary outline-none"
+                      />
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <label className="text-[11px] uppercase tracking-wider text-secondary font-medium">
+                        Category
+                      </label>
+                      <input
+                        type="text"
+                        value={proj.category}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setProjects((prev) =>
+                            prev.map((p) => (p.id === proj.id ? { ...p, category: val } : p))
+                          );
+                        }}
+                        onBlur={async () => {
+                          const current = projects.find((p) => p.id === proj.id);
+                          if (current) {
+                            await saveProject(current);
+                            setToastMessage(`Category saved for "${current.title}"!`);
+                          }
+                        }}
+                        placeholder="e.g. Brand Identity, Poster"
+                        className="bg-surface-container-lowest px-3 py-2 rounded-xl text-sm font-medium text-on-surface border border-outline-variant/40 focus:border-primary outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Description input */}
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[11px] uppercase tracking-wider text-secondary font-medium">
+                      Short Subtitle / Description
+                    </label>
+                    <input
+                      type="text"
+                      value={proj.short_description}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setProjects((prev) =>
+                          prev.map((p) => (p.id === proj.id ? { ...p, short_description: val } : p))
+                        );
+                      }}
+                      onBlur={async () => {
+                        const current = projects.find((p) => p.id === proj.id);
+                        if (current) {
+                          await saveProject(current);
+                        }
+                      }}
+                      placeholder="Brief tagline shown on the 3D card"
+                      className="bg-surface-container-lowest px-3 py-2 rounded-xl text-xs text-on-surface-variant border border-outline-variant/40 focus:border-primary outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-2 border-t border-outline-variant/20">
+                  <span className="text-[11px] text-secondary">Updates instantly on homepage carousel.</span>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      await saveProject(proj);
+                      setToastMessage(`Slide "${proj.title}" synced live!`);
+                    }}
+                    className="px-3.5 py-1.5 rounded-lg bg-surface-container hover:bg-secondary-container text-xs font-semibold text-primary border border-outline-variant/30 transition-colors cursor-pointer"
+                  >
+                    Sync Slide
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* 4. STUDIO PORTRAIT / PHOTO UPLOADER (Direct user request)                */}
         {/* ========================================================================= */}
         <div className="bg-surface-container-lowest p-6 md:p-8 rounded-3xl border border-outline-variant/30 shadow-sm space-y-5">
           <div className="border-b border-outline-variant/20 pb-3">
@@ -361,7 +579,7 @@ export const AdminSettingsPage: React.FC = () => {
         </div>
 
         {/* ========================================================================= */}
-        {/* 4. STUDIO IDENTITY & TITLE                                                */}
+        {/* 5. STUDIO IDENTITY & TITLE                                                */}
         {/* ========================================================================= */}
         <div className="bg-surface-container-lowest p-6 md:p-8 rounded-3xl border border-outline-variant/30 shadow-sm space-y-5">
           <h2 className="font-headline-sm text-lg font-semibold text-on-surface border-b border-outline-variant/20 pb-3">
@@ -424,7 +642,7 @@ export const AdminSettingsPage: React.FC = () => {
         </div>
 
         {/* ========================================================================= */}
-        {/* 5. HERO & COLOPHON NARRATIVE                                              */}
+        {/* 6. HERO & COLOPHON NARRATIVE                                              */}
         {/* ========================================================================= */}
         <div className="bg-surface-container-lowest p-6 md:p-8 rounded-3xl border border-outline-variant/30 shadow-sm space-y-5">
           <h2 className="font-headline-sm text-lg font-semibold text-on-surface border-b border-outline-variant/20 pb-3">
@@ -502,7 +720,7 @@ export const AdminSettingsPage: React.FC = () => {
         </div>
 
         {/* ========================================================================= */}
-        {/* 6. CONTACT & CHANNELS                                                     */}
+        {/* 7. CONTACT & CHANNELS                                                     */}
         {/* ========================================================================= */}
         <div className="bg-surface-container-lowest p-6 md:p-8 rounded-3xl border border-outline-variant/30 shadow-sm space-y-5">
           <h2 className="font-headline-sm text-lg font-semibold text-on-surface border-b border-outline-variant/20 pb-3">
