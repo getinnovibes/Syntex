@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "background": "#fcf8f8", "primary-fixed-dim": "#cbbeff", "tertiary-fixed-dim": "#bdc7de", "on-surface": "#1c1b1b", "surface-bright": "#fcf8f8", "error-container": "#ffdad6", "on-primary-fixed": "#1d0061", "outline-variant": "#cac3d9", "on-primary-container": "#eae2ff", "on-error": "#ffffff", "on-tertiary": "#ffffff", "surface-container-high": "#ebe7e7", "secondary": "#5f5c6e", "on-secondary-fixed-variant": "#474556", "surface-tint": "#632ef6", "tertiary": "#454f63", "secondary-container": "#e2ddf3", "surface-dim": "#dcd9d9", "on-surface-variant": "#484456", "secondary-fixed-dim": "#c8c4d9", "inverse-on-surface": "#f3f0ef", "on-secondary-container": "#636073", "inverse-primary": "#cbbeff", "surface": "#fcf8f8", "primary-fixed": "#e6deff", "on-tertiary-fixed-variant": "#3d475a", "surface-variant": "#e5e2e1", "on-primary-fixed-variant": "#4b00d4", "on-error-container": "#93000a", "on-tertiary-container": "#dce6ff", "on-secondary-fixed": "#1b1a29", "tertiary-container": "#5d677c", "outline": "#797488", "surface-container-lowest": "#ffffff", "primary-container": "#6c3bff", "on-background": "#1c1b1b", "error": "#ba1a1a", "surface-container": "#f0edec", "on-tertiary-fixed": "#111c2d", "primary": "#5308e7", "on-primary": "#ffffff", "secondary-fixed": "#e4e0f5", "tertiary-fixed": "#d9e3fb", "inverse-surface": "#313030", "on-secondary": "#ffffff", "surface-container-highest": "#e5e2e1", "surface-container-low": "#f6f3f2" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "space-md": "1rem", "margin": "1.5rem", "space-3xl": "6rem", "space-xl": "2.5rem", "gutter": "1.5rem", "margin-lg": "5rem", "gutter-lg": "2.5rem", "space-xs": "0.25rem", "space-2xl": "4rem", "margin-md": "3rem", "space-lg": "1.5rem" }, "fontFamily": { "display-hero": [ "Space Grotesk" ], "body-sm": [ "Hanken Grotesk" ], "headline-xl": [ "Space Grotesk" ], "display-hero-mobile": [ "Space Grotesk" ], "headline-xl-mobile": [ "Space Grotesk" ], "body-lg": [ "Hanken Grotesk" ], "headline-lg": [ "Space Grotesk" ], "label-md": [ "JetBrains Mono" ], "headline-md": [ "Space Grotesk" ], "body-md": [ "Hanken Grotesk" ], "headline-lg-mobile": [ "Space Grotesk" ], "label-sm": [ "JetBrains Mono" ], "headline-sm": [ "Space Grotesk" ] }, "fontSize": { "display-hero": [ "72px", { "lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "600" } ], "body-sm": [ "13px", { "lineHeight": "20px", "letterSpacing": "0.005em", "fontWeight": "400" } ], "headline-xl": [ "48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "600" } ], "display-hero-mobile": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "600" } ], "headline-xl-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-lg": [ "18px", { "lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "400" } ], "headline-lg": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "500" } ], "label-md": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" } ], "headline-md": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "500" } ], "body-md": [ "15px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" } ], "headline-lg-mobile": [ "26px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "500" } ], "label-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" } ], "headline-sm": [ "18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" } ] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100%;background-color:#fcf8f8;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 1rem);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-surface text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="Toggle Navigation Menu" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface hover:bg-secondary-container/40 transition-colors"><span class="material-symbols-outlined text-[22px]">menu</span></button><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface leading-none">Syntax</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-0.5">Abdullah</span></div></div><div class="flex items-center gap-space-sm"><span class="hidden font-label-md text-label-md text-on-surface-variant uppercase">Portfolio Archive</span><a class="h-11 px-4 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm uppercase tracking-wider flex items-center justify-center shadow-[0_4px_16px_-4px_rgba(108,59,255,0.4)] hover:bg-primary transition-all active:scale-95" data-path="hire-me" href="#">Hire Me</a><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_0_0_2px_rgba(108,59,255,0.15)]" src="https://lh3.googleusercontent.com/aida/AEtjO1VYEsgdgRCEOxb4ZJwY-gj9mr51T73KNuk_0wUVRC8a8aOu7GeMk40OiDuhJrt4CquWTtBQMNXXXh01YiL84zFen7YG8zlL3innrDGmbhTSYaYb2aIjFp7w0DDVUPcLhrXyc2wa8Ws6kCcvyE-2YTUC8W_O4tw7-j99_a5IM17CAkCPYAeOAbsLkagkbG5QCThJSF-S0SmSQVxt_4NY4s8uMjyFqMtifb-Pk8CwweimugwSyiW93_gPhi4"/></div></div></header><main class="flex flex-col relative w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full pb-24 space-y-12">
+<!-- Hero Section -->
+<section class="flex flex-col px-margin pt-4 space-y-6">
+<!-- Status Pill -->
+<div class="inline-flex self-start items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-container/60 shadow-sm backdrop-blur-md">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary font-semibold tracking-wide uppercase">Independent Practice • Available for Q2/Q3</span>
+</div>
+<!-- Editorial Typography Display -->
+<div class="flex flex-col space-y-3">
+<h1 class="font-headline-xl-mobile text-headline-xl-mobile text-on-surface tracking-tight leading-[1.08]">
+        Visual Design <br/>
+<span class="text-primary-container bg-gradient-to-r from-primary-container to-surface-tint bg-clip-text text-transparent">&amp; High-Impact</span> <br/>
+        Digital Craft
+      </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm leading-relaxed">
+        A creative designer focused on brand identity, digital visuals and high-impact design experiences crafted for progressive brands worldwide.
+      </p>
+</div>
+<!-- Dual Actions -->
+<div class="flex items-center gap-3 pt-1">
+<a class="flex-1 h-12 rounded-full bg-primary-container text-on-primary font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_12px_28px_-6px_rgba(108,59,255,0.36)] active:scale-98 transition-all" href="#project-inquiry">
+<span>Start a Project</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a class="px-5 h-12 rounded-full bg-surface-container-lowest text-on-surface font-label-md text-label-md uppercase tracking-wide flex items-center justify-center shadow-[0_4px_16px_-4px_rgba(8,8,8,0.06)] active:scale-98 transition-all" href="#portfolio-showcase">
+        Archive
+      </a>
+</div>
+<!-- Tool Stack Chips -->
+<div class="flex flex-wrap items-center gap-2 pt-2">
+<span class="px-3 py-1.5 rounded-full bg-surface-container-low text-secondary font-label-sm text-label-sm">Figma</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container-low text-secondary font-label-sm text-label-sm">Photoshop CC</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container-low text-secondary font-label-sm text-label-sm">Illustrator</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container-low text-secondary font-label-sm text-label-sm">After Effects</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container-low text-secondary font-label-sm text-label-sm">Cinema 4D</span>
+</div>
+</section>
+<!-- Featured Floating Visual Showcase -->
+<section class="flex flex-col px-margin space-y-4">
+<div class="relative w-full rounded-2xl bg-surface-container-lowest p-3 shadow-[0_20px_40px_-15px_rgba(8,8,8,0.06)] overflow-hidden">
+<div class="relative h-60 w-full rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Vibrant ultraviolet Swiss graphic design poster tilted preview with bold typography SYNTHESIS, glowing 3D metallic liquid ribbon centerpiece, futuristic gradient accents, soft exhibition metadata labels, luxury art gallery aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn737rJHHJNRnsXQw0Nq5g4SDoAw6pmSUs-D-ZtUdsTIxx1dND_edhK5NXY2AzRvA_LjPqv5lUjzvdbTXjW6FU-Vi0HSEN9crX9nvre0n8OYOxP6vGVOY8YElHeFdsr5FPMRaKwH4ujzZXJmhnUfv0dRbGfCLKkBjun-HJ8K6K-duv2omIcmNNgBHe_S2i0csujwfs8NEvJCjr1zAqPTq46tUOaUaJGA9pfd8uNKgRpA4at6RE25gpQA"/>
+<div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md">
+<span class="font-label-sm text-[10px] text-primary uppercase font-bold tracking-wider">Poster Design</span>
+</div>
+<div class="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-sm">
+<span class="font-label-sm text-[11px] text-on-surface font-semibold">Exhibition 2024</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-2 pt-3">
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Synthesis Exhibition</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kinetic Graphic Posters &amp; Editorial</span>
+</div>
+<div class="w-9 h-9 rounded-full bg-secondary-container/50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">north_east</span>
+</div>
+</div>
+</div>
+<!-- Secondary Hero Card Overlay Effect -->
+<div class="relative w-full rounded-2xl bg-surface-container-lowest p-3 shadow-[0_16px_32px_-12px_rgba(8,8,8,0.05)] overflow-hidden">
+<div class="relative h-48 w-full rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="High-end stationery brand mockup layout for Aura Creative with minimalist luxury white letterheads, dark purple luxury bound notebook, matte business cards, pen and minimal sleek office stationery on light gray studio concrete surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt1xR8ywZsAgyP-7JBt5rgroEsaXxrzTSUe_QNIz3oI-q7_t9BtrJ2QDBGMdjnDuh9wr9FM0AaLwCiPlsGRz48xyg3Vo8pYe-AubSsm-Rv38PHTytCGcus59j2y5-haeR3dpYupGkR7dor9olgV-6yVefbat64VYkWTkVKbn5YQsMiQoKkWkOG8BANiBNESc2jdtCRHdo9TPLQBbZ677W206lP79PPgP4oLSVkDyakzvgVtGGdmO7GzA"/>
+<div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md">
+<span class="font-label-sm text-[10px] text-primary uppercase font-bold tracking-wider">Identity System</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-2 pt-3">
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Aura Creative Studio</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Complete Brand Identity &amp; Print Assets</span>
+</div>
+<div class="w-9 h-9 rounded-full bg-secondary-container/50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">north_east</span>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section with 3D Portrait & Metrics -->
+<section class="flex flex-col px-margin space-y-6">
+<div class="rounded-3xl bg-surface-container-low p-6 shadow-sm flex flex-col space-y-5">
+<div class="flex items-center gap-4">
+<div class="relative w-20 h-20 rounded-2xl overflow-hidden bg-surface-container-high shadow-md shrink-0">
+<img alt="Abdullah 3D Portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VYEsgdgRCEOxb4ZJwY-gj9mr51T73KNuk_0wUVRC8a8aOu7GeMk40OiDuhJrt4CquWTtBQMNXXXh01YiL84zFen7YG8zlL3innrDGmbhTSYaYb2aIjFp7w0DDVUPcLhrXyc2wa8Ws6kCcvyE-2YTUC8W_O4tw7-j99_a5IM17CAkCPYAeOAbsLkagkbG5QCThJSF-S0SmSQVxt_4NY4s8uMjyFqMtifb-Pk8CwweimugwSyiW93_gPhi4"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-primary uppercase font-semibold tracking-wider">Director &amp; Maker</span>
+<h2 class="font-headline-md text-headline-md text-on-surface truncate">Abdullah</h2>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Graphics Designer &amp; Visual Director</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+        Merging strict typographical discipline with kinetic visual energy. I assist brands, cultural events, and visionary studios in translating ideas into memorable graphic artifacts.
+      </p>
+<!-- Stat Badges Bento -->
+<div class="grid grid-cols-3 gap-2 pt-1">
+<div class="flex flex-col items-center justify-center p-3 rounded-2xl bg-surface-container-lowest shadow-sm text-center">
+<span class="font-headline-sm text-headline-sm text-primary-container font-bold">5+</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase mt-0.5">Years Exp</span>
+</div>
+<div class="flex flex-col items-center justify-center p-3 rounded-2xl bg-surface-container-lowest shadow-sm text-center">
+<span class="font-headline-sm text-headline-sm text-primary-container font-bold">120+</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase mt-0.5">Projects</span>
+</div>
+<div class="flex flex-col items-center justify-center p-3 rounded-2xl bg-surface-container-lowest shadow-sm text-center">
+<span class="font-headline-sm text-headline-sm text-primary-container font-bold">99%</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase mt-0.5">Satisfied</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Works Interactive Carousel Strip -->
+<section class="flex flex-col space-y-4" id="portfolio-showcase">
+<div class="flex items-center justify-between px-margin">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-widest">Selected Output</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Curated Works</h2>
+</div>
+<div class="flex items-center gap-1.5">
+<button aria-label="Previous Project" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface active:bg-secondary-container transition-colors" id="carousel-prev">
+<span class="material-symbols-outlined text-[18px]">west</span>
+</button>
+<button aria-label="Next Project" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface active:bg-secondary-container transition-colors" id="carousel-next">
+<span class="material-symbols-outlined text-[18px]">east</span>
+</button>
+</div>
+</div>
+<!-- Horizontal Swipe Strip -->
+<div class="flex gap-4 overflow-x-auto px-margin scroll-smooth pb-2" id="works-container" style="-webkit-overflow-scrolling: touch;">
+<!-- Card 1 -->
+<div class="min-w-[280px] w-[280px] rounded-3xl bg-surface-container-lowest p-3 shadow-[0_12px_28px_-8px_rgba(8,8,8,0.06)] flex flex-col space-y-3 shrink-0">
+<div class="relative h-44 w-full rounded-2xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Modernist typographic poster design with high-contrast monochrome Swiss layout and bright violet holographic fluid gradients, bold typography, layout grid markers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0gqtJJD0liecLrsy_R6tuwSUc8fQd_ef-4rm2pP80KV6ejnUnTTrN2XZtm7tTnQ0MDpDBqQxpfVWyOeboB1E4Xnx9RSpto12UzKvyxcV-GaUZpG6DU9oGefyB2ZUctBFURc5hFJqRTFzj_LbnV6DNuifiXZoi25DMHpcrupWIkHZbPuw_seRLFu-aL48OJz9t9mXrlpRbZJc-dI-vHl7G2bSq0D9M1R9ypRGgl-Pu-SxrsBkcSuBqog"/>
+<span class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 font-label-sm text-[10px] font-semibold text-primary">Poster Design</span>
+</div>
+<div class="flex flex-col px-1 pb-1">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Synthesis Kinetic</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Exhibition print &amp; dynamic social motion kit.</p>
+<div class="flex items-center justify-between pt-3">
+<span class="font-label-sm text-[11px] text-secondary">2024 Archive</span>
+<span class="font-label-sm text-label-sm text-primary font-medium flex items-center gap-0.5">View <span class="material-symbols-outlined text-[14px]">arrow_forward</span></span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[280px] w-[280px] rounded-3xl bg-surface-container-lowest p-3 shadow-[0_12px_28px_-8px_rgba(8,8,8,0.06)] flex flex-col space-y-3 shrink-0">
+<div class="relative h-44 w-full rounded-2xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Luxury corporate visual identity system mockup featuring modern stationery set, embossed letterpress logos, deep plum and off-white business paper, high-end editorial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-Trit_i6nup3G6-VF1EW8NH4yEsfdMOvcveytueN5Qs_IfHvAdu5V1r1tyIxFvParGFusc3ex0eRqjEpM7cG9psjvVO2L_HJB8WB_XIoCDGOBmaFI8tMwbbpJv_3PJlXs6JICpc3kmRpKCsczJgr7uRuFrk98v1ia8jez-aacC-cbzCU0OJ6PvHnymRlU5EWiHWncEomq7g7soAy4Z_QZqNY---M2uKV1Fff7pBAMN80l6Xo4z6hLxQ"/>
+<span class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 font-label-sm text-[10px] font-semibold text-primary">Brand Identity</span>
+</div>
+<div class="flex flex-col px-1 pb-1">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Aura System</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Corporate visual guidelines &amp; collateral suite.</p>
+<div class="flex items-center justify-between pt-3">
+<span class="font-label-sm text-[11px] text-secondary">2024 Archive</span>
+<span class="font-label-sm text-label-sm text-primary font-medium flex items-center gap-0.5">View <span class="material-symbols-outlined text-[14px]">arrow_forward</span></span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[280px] w-[280px] rounded-3xl bg-surface-container-lowest p-3 shadow-[0_12px_28px_-8px_rgba(8,8,8,0.06)] flex flex-col space-y-3 shrink-0">
+<div class="relative h-44 w-full rounded-2xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Futuristic neon luminescent festival promotional banner and YouTube visual design with chromatic glass refraction, abstract cyber violet typography and high engagement visuals." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAk7Ym4mHlieONQX1eLtEozkd5IhVzLaS7ITYsdXeGcs9GqFaNdUP5h4EpoZESY3UJlMvtoIeDFEvfaQDYX-op7_YqJdXUHf9scCdO2faHqweDov1JkLkEMBnLLyjHDr_osi3pzMvbTjjbYJ-oH-VGzqbb7Ls1Lyrrek3SHuy9W5BFUdozD8VDGL5vszUcCxX-fLcEmeFDa8FVBnV01a394Bc8Bt9OTHKCmbvSqqeR3rZDzn5-NIn51_g"/>
+<span class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 font-label-sm text-[10px] font-semibold text-primary">Digital Campaign</span>
+</div>
+<div class="flex flex-col px-1 pb-1">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Lumina Soundfest</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">High-conversion festival digital billboards &amp; banners.</p>
+<div class="flex items-center justify-between pt-3">
+<span class="font-label-sm text-[11px] text-secondary">2023 Archive</span>
+<span class="font-label-sm text-label-sm text-primary font-medium flex items-center gap-0.5">View <span class="material-symbols-outlined text-[14px]">arrow_forward</span></span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="min-w-[280px] w-[280px] rounded-3xl bg-surface-container-lowest p-3 shadow-[0_12px_28px_-8px_rgba(8,8,8,0.06)] flex flex-col space-y-3 shrink-0">
+<div class="relative h-44 w-full rounded-2xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Click-optimized ultra high-fidelity YouTube thumbnail and social billboard featuring high-contrast geometric 3D typography, subtle metallic sparkles and crisp focal composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-yKYS2fiZAP_8qTV3tnKv_7V505J3p-rMZ_AB-qh8Vxg0MjJpk21egsvWT3U7Nf1KjFJJGNJ36BoNOoEIUMLgU95UlkJ3ULLjO_AKDIuCzDytWF16lGv91HSeHSmvlEOMWZLIElDBF5zau81GC_Sqqj0Ke00hnzOCy0jK6v2fkr2GjclzTx0mALbmD1jwy2-KUAQb-WXPdSZX8SpBdOe7pD3vWApOd05ZAd_W-1jtrWiT3UkHS1NRjw"/>
+<span class="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 font-label-sm text-[10px] font-semibold text-primary">Thumbnail Design</span>
+</div>
+<div class="flex flex-col px-1 pb-1">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Visual Velocity</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Creator thumbnails driving over 4M impressions.</p>
+<div class="flex items-center justify-between pt-3">
+<span class="font-label-sm text-[11px] text-secondary">2024 Archive</span>
+<span class="font-label-sm text-label-sm text-primary font-medium flex items-center gap-0.5">View <span class="material-symbols-outlined text-[14px]">arrow_forward</span></span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Purpose-Built Design Solutions (Services) -->
+<section class="flex flex-col px-margin space-y-4">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-widest">Capabilities</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Purpose-Built Solutions</h2>
+</div>
+<div class="flex flex-col space-y-3 pt-1">
+<!-- Service 1 -->
+<div class="rounded-2xl bg-surface-container-low p-5 flex flex-col space-y-2.5 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary-container shadow-sm">
+<span class="material-symbols-outlined text-[22px]">category</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant font-mono">01 // CORE</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface pt-1">Brand Identity Systems</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Comprehensive logomarks, typography rules, color frameworks, and responsive design guidelines tailored for timeless distinctiveness.
+        </p>
+</div>
+<!-- Service 2 -->
+<div class="rounded-2xl bg-surface-container-low p-5 flex flex-col space-y-2.5 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary-container shadow-sm">
+<span class="material-symbols-outlined text-[22px]">view_quilt</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant font-mono">02 // PRINT &amp; DIGITAL</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface pt-1">Social &amp; Exhibition Posters</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Arresting visual storytelling for cultural events, product launches, gallery showcases, and highly shareable social campaigns.
+        </p>
+</div>
+<!-- Service 3 -->
+<div class="rounded-2xl bg-surface-container-low p-5 flex flex-col space-y-2.5 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary-container shadow-sm">
+<span class="material-symbols-outlined text-[22px]">web_stories</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant font-mono">03 // CAMPAIGNS</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface pt-1">Web &amp; Ad Banner Design</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Performance-tuned display ads, hero banners, and promotional digital collateral constructed to command audience attention.
+        </p>
+</div>
+<!-- Service 4 -->
+<div class="rounded-2xl bg-surface-container-low p-5 flex flex-col space-y-2.5 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary-container shadow-sm">
+<span class="material-symbols-outlined text-[22px]">smart_display</span>
+</div>
+<span class="font-label-sm text-[11px] text-on-surface-variant font-mono">04 // GROWTH</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface pt-1">High-CTR Thumbnail Design</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Precision composition and high-engagement visual styling designed specifically for YouTube creators, podcasts, and digital products.
+        </p>
+</div>
+</div>
+</section>
+<!-- Interactive Project Inquiry Form -->
+<section class="flex flex-col px-margin space-y-5" id="project-inquiry">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-widest">Get In Touch</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Let's Work Together</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Direct inquiries receive proposals within 24 business hours.</p>
+</div>
+<form class="flex flex-col space-y-4 rounded-3xl bg-surface-container-lowest p-6 shadow-[0_20px_40px_-15px_rgba(8,8,8,0.06)]" id="inquiry-form" onsubmit="event.preventDefault(); document.getElementById('success-state').classList.remove('hidden'); this.classList.add('hidden');">
+<!-- Full Name -->
+<div class="flex flex-col space-y-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="name">Your Name or Brand</label>
+<input class="w-full px-4 h-12 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline/60 text-sm focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all" id="name" placeholder="e.g. Elena Rostova / Lumina" required="" type="text"/>
+</div>
+<!-- Service Requested -->
+<div class="flex flex-col space-y-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="service-type">Project Type</label>
+<div class="relative">
+<select class="w-full px-4 h-12 rounded-xl bg-surface-container-low text-on-surface text-sm appearance-none focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all pr-10" id="service-type">
+<option value="brand">Brand Identity &amp; System</option>
+<option value="posters">Poster Series &amp; Exhibition Visuals</option>
+<option value="banners">Digital Ad &amp; Web Banner Suite</option>
+<option value="thumbnails">High-Impact YouTube Thumbnails</option>
+<option value="full">Full Retainer / Multi-Discipline</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-3 top-3.5 text-on-surface-variant text-[20px]">expand_more</span>
+</div>
+</div>
+<!-- Budget Range -->
+<div class="flex flex-col space-y-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="budget">Estimated Budget (USD)</label>
+<div class="relative">
+<select class="w-full px-4 h-12 rounded-xl bg-surface-container-low text-on-surface text-sm appearance-none focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all pr-10" id="budget">
+<option value="tier1">$1,500 – $3,000</option>
+<option value="tier2">$3,000 – $6,000</option>
+<option value="tier3">$6,000 – $12,000</option>
+<option value="tier4">$12,000+</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-3 top-3.5 text-on-surface-variant text-[20px]">expand_more</span>
+</div>
+</div>
+<!-- Reference Link -->
+<div class="flex flex-col space-y-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="ref-link">Reference or Existing URL</label>
+<input class="w-full px-4 h-12 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline/60 text-sm focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all" id="ref-link" placeholder="https://example.com" type="url"/>
+</div>
+<!-- Brief Description -->
+<div class="flex flex-col space-y-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="brief">Project Scope &amp; Goals</label>
+<textarea class="w-full p-4 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline/60 text-sm focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all resize-none" id="brief" placeholder="Tell me about your timeline, deliverables, and vision..." required="" rows="3"></textarea>
+</div>
+<!-- Submit CTA -->
+<button class="w-full h-12 mt-2 rounded-full bg-primary-container text-on-primary font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_12px_28px_-6px_rgba(108,59,255,0.36)] active:scale-98 transition-all" type="submit">
+<span>Send Project Request</span>
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+<span class="font-label-sm text-[10px] text-center text-on-surface-variant pt-1">
+        Guaranteed confidentiality • NDA available upon request
+      </span>
+</form>
+<!-- Success Confirmation State (Hidden initially) -->
+<div class="hidden flex flex-col items-center justify-center p-8 rounded-3xl bg-secondary-container/40 text-center space-y-3" id="success-state">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[26px]">check</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Inquiry Dispatched</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs">
+        Thank you. Abdullah will review your request and get back with scheduling details shortly.
+      </p>
+<button class="pt-2 font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider" onclick="document.getElementById('success-state').classList.add('hidden'); document.getElementById('inquiry-form').reset(); document.getElementById('inquiry-form').classList.remove('hidden');">
+        Send Another Message
+      </button>
+</div>
+</section>
+<!-- Editorial Micro-Footer -->
+<footer class="flex flex-col px-margin pt-4 pb-8 space-y-6">
+<div class="h-[1px] w-full bg-surface-container-high"></div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">SYNTAX</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant tracking-wider uppercase mt-0.5">Abdullah Studio • London / Remote</span>
+</div>
+<a class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface active:bg-secondary-container transition-colors" href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+<span class="material-symbols-outlined text-[20px]">arrow_upward</span>
+</a>
+</div>
+<!-- Social Matrix -->
+<div class="flex flex-wrap gap-x-4 gap-y-2">
+<a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors" href="#">Behance</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors" href="#">Dribbble</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors" href="#">LinkedIn</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors" href="#">Instagram</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors" href="#">X / Twitter</a>
+</div>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-sm text-[10px] text-outline">© 2025 Abdullah. All Rights Reserved.</span>
+<span class="font-label-sm text-[10px] text-outline">v2.4 Editorial</span>
+</div>
+</footer>
+</div>
+<script>
+  (function initCarouselNav() {
+    const container = document.getElementById('works-container');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+
+    if (container && prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', () => {
+        container.scrollBy({ left: -296, behavior: 'smooth' });
+      });
+      nextBtn.addEventListener('click', () => {
+        container.scrollBy({ left: 296, behavior: 'smooth' });
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe pointer-events-none" data-active-classes="bg-secondary-container text-primary font-medium shadow-[0_2px_8px_rgba(0,0,0,0.04)]"><div class="mx-auto max-w-sm px-margin pb-2"><div class="pointer-events-auto h-16 bg-surface-container-lowest/80 backdrop-blur-xl rounded-full shadow-[0_12px_32px_-8px_rgba(8,8,8,0.08)] flex items-center justify-around px-2"><a aria-current="page" aria-label="Works" class="flex flex-col items-center justify-center w-12 h-12 rounded-full transition-colors bg-secondary-container text-primary font-medium shadow-[0_2px_8px_rgba(0,0,0,0.04)]" data-path="portfolio-archive" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-sm text-[10px] tracking-tight leading-none mt-0.5">Works</span></a><a aria-label="CMS" class="flex flex-col items-center justify-center w-12 h-12 rounded-full text-on-surface-variant hover:text-on-surface transition-colors" data-path="creative-cms-dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dataset</span><span class="font-label-sm text-[10px] tracking-tight leading-none mt-0.5">CMS</span></a><a aria-label="Media" class="flex flex-col items-center justify-center w-12 h-12 rounded-full text-on-surface-variant hover:text-on-surface transition-colors" data-path="media-library" href="#"><span class="material-symbols-outlined text-[20px]">perm_media</span><span class="font-label-sm text-[10px] tracking-tight leading-none mt-0.5">Media</span></a><a aria-label="Journal" class="flex flex-col items-center justify-center w-12 h-12 rounded-full text-on-surface-variant hover:text-on-surface transition-colors" data-path="curated-journal" href="#"><span class="material-symbols-outlined text-[20px]">article</span><span class="font-label-sm text-[10px] tracking-tight leading-none mt-0.5">Notes</span></a></div></div></nav></body></html>

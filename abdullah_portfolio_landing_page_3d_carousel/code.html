@@ -1,0 +1,802 @@
+<!DOCTYPE html><html lang="en" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;family=Space+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error-container":"#93000a","on-surface":"#1c1b1b","on-tertiary-fixed-variant":"#3d475a","on-secondary-fixed":"#1b1a29","on-tertiary-fixed":"#111c2d","surface-container-high":"#ebe7e7","primary-fixed":"#e6deff","surface-bright":"#fcf8f8","secondary-container":"#e2ddf3","surface-variant":"#e5e2e1","tertiary":"#454f63","on-primary-container":"#eae2ff","background":"#fcf8f8","surface-container":"#f0edec","on-primary":"#ffffff","inverse-on-surface":"#f3f0ef","on-surface-variant":"#484456","on-background":"#1c1b1b","surface-container-low":"#f6f3f2","secondary-fixed":"#e4e0f5","outline":"#797488","on-secondary-container":"#636073","surface-tint":"#632ef6","primary-container":"#6c3bff","surface":"#fcf8f8","inverse-surface":"#313030","surface-container-highest":"#e5e2e1","primary-fixed-dim":"#cbbeff","on-error":"#ffffff","inverse-primary":"#cbbeff","tertiary-fixed":"#d9e3fb","on-secondary-fixed-variant":"#474556","surface-dim":"#dcd9d9","error-container":"#ffdad6","error":"#ba1a1a","secondary-fixed-dim":"#c8c4d9","on-primary-fixed-variant":"#4b00d4","tertiary-fixed-dim":"#bdc7de","surface-container-lowest":"#ffffff","outline-variant":"#cac3d9","on-secondary":"#ffffff","secondary":"#5f5c6e","on-primary-fixed":"#1d0061","primary":"#5308e7","tertiary-container":"#5d677c","on-tertiary":"#ffffff","on-tertiary-container":"#dce6ff"},borderRadius:{DEFAULT:"1rem",lg:"2rem",xl:"3rem",full:"9999px"},spacing:{"space-xs":"0.25rem","gutter-lg":"2.5rem","space-md":"1rem","space-lg":"1.5rem","margin-lg":"5rem","space-2xl":"4rem","space-3xl":"6rem","margin-md":"3rem",gutter:"1.5rem",margin:"1.5rem","space-sm":"0.5rem","space-xl":"2.5rem"},fontFamily:{"display-hero":["Space Grotesk"],"label-md":["JetBrains Mono"],"label-sm":["JetBrains Mono"],"headline-xl-mobile":["Space Grotesk"],"display-hero-mobile":["Space Grotesk"],"headline-xl":["Space Grotesk"],"body-lg":["Hanken Grotesk"],"headline-lg":["Space Grotesk"],"body-sm":["Hanken Grotesk"],"body-md":["Hanken Grotesk"],"headline-md":["Space Grotesk"],"headline-lg-mobile":["Space Grotesk"],"headline-sm":["Space Grotesk"]},fontSize:{"display-hero":["72px",{lineHeight:"80px",letterSpacing:"-0.04em",fontWeight:"600"}],"label-md":["13px",{lineHeight:"18px",letterSpacing:"0.02em",fontWeight:"500"}],"label-sm":["11px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"500"}],"headline-xl-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"600"}],"display-hero-mobile":["40px",{lineHeight:"48px",letterSpacing:"-0.03em",fontWeight:"600"}],"headline-xl":["48px",{lineHeight:"56px",letterSpacing:"-0.03em",fontWeight:"600"}],"body-lg":["18px",{lineHeight:"28px",letterSpacing:"-0.005em",fontWeight:"400"}],"headline-lg":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"500"}],"body-sm":["13px",{lineHeight:"20px",letterSpacing:"0.005em",fontWeight:"400"}],"body-md":["15px",{lineHeight:"24px",letterSpacing:"0em",fontWeight:"400"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.015em",fontWeight:"500"}],"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.02em",fontWeight:"500"}],"headline-sm":["18px",{lineHeight:"26px",letterSpacing:"-0.01em",fontWeight:"600"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen"><header class="fixed top-0 left-0 right-0 z-50"><div class="h-20 max-w-[1440px] mx-auto px-margin-lg flex items-center justify-between"><div class="flex items-center gap-space-sm"><a class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight" data-path="home" href="#">Syntax</a></div><nav class="hidden md:flex items-center bg-surface-container-lowest/80 backdrop-blur-xl px-space-xs py-space-xs rounded-full shadow-[0_20px_40px_-15px_rgba(8,8,8,0.05),0_0_1px_rgba(8,8,8,0.08)]" data-active-classes="bg-secondary-container text-primary font-medium rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.04)]"><a aria-current="page" class="px-space-md py-space-xs transition-all duration-200 bg-secondary-container text-primary font-medium rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.04)]" data-path="home" href="#">Home</a><a class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all duration-200" data-path="about" href="#about">About</a><a class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all duration-200" data-path="services" href="#services-section">Services</a><a class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all duration-200" data-path="portfolio" href="#portfolio-section">Portfolio</a><a class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all duration-200" data-path="contact" href="#contact-section">Contact</a></nav><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center justify-center px-space-lg py-space-sm bg-primary-container text-on-primary font-headline-sm text-headline-sm rounded-full shadow-[0_12px_28px_-6px_rgba(108,59,255,0.28)] hover:bg-primary transition-all duration-200" data-path="contact" href="#contact-section">Hire Me</a></div></div></header><main class="w-full pt-20 bg-background"><div class="flex flex-col w-full">
+<!-- HERO SECTION -->
+<section class="relative w-full overflow-hidden px-margin md:px-margin-lg pt-space-xl pb-space-3xl flex flex-col items-center text-center">
+<!-- Ambient Violet Glow Orbs -->
+<div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-gradient-to-b from-primary-fixed-dim/35 via-primary-fixed/20 to-transparent blur-3xl pointer-events-none -z-10 rounded-full"></div>
+<div class="absolute top-1/3 -left-32 w-80 h-80 bg-primary-fixed-dim/20 blur-3xl pointer-events-none -z-10 rounded-full"></div>
+<div class="absolute top-1/2 -right-32 w-80 h-80 bg-secondary-container/40 blur-3xl pointer-events-none -z-10 rounded-full"></div>
+<!-- Designer Pill Badge -->
+<div class="inline-flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface-container-lowest shadow-[0_4px_16px_rgba(8,8,8,0.04)] mb-space-lg">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium tracking-wider uppercase">Independent Practice • Available for Q2/Q3 Projects</span>
+</div>
+<!-- Centered Editorial Headline -->
+<div class="max-w-5xl mx-auto space-y-space-md">
+<h1 class="font-display-hero text-display-hero text-on-surface tracking-tight">
+        Visual Design &amp; <span class="text-primary-container">High-Impact Digital Craft</span>
+</h1>
+<p class="max-w-2xl mx-auto font-body-lg text-body-lg text-on-surface-variant">
+        A creative designer focused on brand identity, digital visuals and high-impact design experiences.
+      </p>
+</div>
+<!-- Action Bar & Tool Badge Strip -->
+<div class="mt-space-xl flex flex-col sm:flex-row items-center justify-center gap-space-md z-20">
+<a class="inline-flex items-center justify-center px-space-xl py-space-sm bg-primary-container text-on-primary font-headline-sm text-headline-sm rounded-full shadow-[0_12px_28px_-6px_rgba(108,59,255,0.32)] hover:bg-primary transition-all duration-300 transform hover:-translate-y-0.5" href="#contact-section">
+        Start a Project
+        <span class="material-symbols-outlined ml-space-xs text-[20px]">arrow_forward</span>
+</a>
+<a class="inline-flex items-center justify-center px-space-xl py-space-sm bg-surface-container-lowest text-on-surface font-headline-sm text-headline-sm rounded-full shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:bg-secondary-container/40 transition-all duration-200" href="#portfolio-section">
+        Explore Archive
+      </a>
+</div>
+<!-- Minimal Luxury Software Pill Badges -->
+<div class="mt-space-xl inline-flex flex-wrap items-center justify-center gap-space-xs bg-surface-container-lowest/80 backdrop-blur-md px-space-md py-space-xs rounded-full shadow-[0_6px_20px_-4px_rgba(8,8,8,0.04)]">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mr-space-xs">Toolkit</span>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-low text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-[15px]">auto_fix_high</span>
+<span class="">Photoshop</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-low text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-[15px]">draw</span>
+<span class="">Illustrator</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-low text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-[15px]">dashboard_customize</span>
+<span class="">Figma</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-low text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-[15px]">animation</span>
+<span class="">After Effects</span>
+</div>
+</div>
+<!-- Floating Perspective Project Previews -->
+<div class="relative w-full max-w-6xl mt-space-2xl min-h-[380px] hidden md:block">
+<!-- Floating Card Left (Brand System - AURA) -->
+<div class="absolute left-4 top-4 w-72 rounded-2xl bg-surface-container-lowest p-space-sm shadow-[0_24px_50px_-12px_rgba(8,8,8,0.12)] transform -rotate-3 hover:rotate-0 transition-transform duration-500 z-10">
+<div class="w-full h-44 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Aura Creative luxury corporate stationery mockup set with clean purple foil accents, black leather debossed notebook, business card stack, and architectural pen arranged on concrete slab" src="https://lh3.googleusercontent.com/aida/AEtjO1V3VLyGkT6A1nqme28OkpHoWjcgYtZSlVvZPjFeTjvsdm-t6LWyg5MXTpCuesYmlziiJOVHtra10D_sSGP4LSBwQuQ9R7SxD37z1h0zlhDVzM2Kgge-crUuSVALWZXCDn-qmDew8neVjelcoy6wCCZBV7MuMfyyqXREwC-kqY2QBeqoe9amrlKDf9RfJweIL3M1EqZ82JR65BKbDJLpbBn943ueL1gzPU-c7azWBRSXtl6ZYhR4t9Y7_A46">
+</div>
+<div class="pt-space-sm text-left flex items-center justify-between">
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface">Aura Creative</p>
+<p class="font-label-sm text-label-sm text-secondary">Identity System • 2024</p>
+</div>
+<span class="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[16px]">north_east</span>
+</span>
+</div>
+</div>
+<!-- Center Minimal Specimen Anchor -->
+<div class="absolute left-1/2 -translate-x-1/2 top-12 w-80 rounded-2xl bg-surface-container-lowest/90 backdrop-blur-xl p-space-md shadow-[0_30px_60px_-15px_rgba(108,59,255,0.12)] z-20 text-left">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider">Live Specimen</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span> Curated
+          </span>
+</div>
+<p class="font-headline-md text-headline-md font-semibold text-on-surface tracking-tight mt-1">Typographic Systems &amp; Spatial Balance</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Harmonizing brand narrative with architectural layout structures.</p>
+<div class="mt-space-md pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-secondary">
+<span class="">01 / 04 Selected</span>
+<span class="text-primary font-medium">Review Casefile →</span>
+</div>
+</div>
+<!-- Floating Card Right (Poster - Synthesis) -->
+<div class="absolute right-4 top-2 w-72 rounded-2xl bg-surface-container-lowest p-space-sm shadow-[0_24px_50px_-12px_rgba(8,8,8,0.12)] transform rotate-4 hover:rotate-0 transition-transform duration-500 z-10">
+<div class="w-full h-44 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Synthesis digital art exhibition poster featuring high-gloss 3D violet chrome ribbons, clean Swiss typography, grid alignment, and neon lavender glow on rich black frame" src="https://lh3.googleusercontent.com/aida/AEtjO1WmRXsoZ2osOQIg9umTgobi23TUxEc8MFxCAWyxPnZdEtFhaFIoKSZUox5tr-5UiT9dqofkWe3x5WT8PMwmDXMR8OyX-mpxnC7fV65JAtU9Ull2mm42L1t8ff93fe6ZpuXuGNsNJL4Ryt5TfKEJwSvR7sfcXoLcxgFboDxmhnUskgBR0W0EcW_EicczIWr4WsGr9SUpOztCS9_ZhpN2EywVo1YrXZ-O3MFzb7-Kzz3XVMU576VOO_eity1T">
+</div>
+<div class="pt-space-sm text-left flex items-center justify-between">
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface">Synthesis Exhibition</p>
+<p class="font-label-sm text-label-sm text-secondary">Print &amp; Motion • 2024</p>
+</div>
+<span class="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[16px]">north_east</span>
+</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ABOUT SECTION -->
+<section class="w-full bg-surface-container-low py-space-3xl px-margin md:px-margin-lg" id="about">
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-2xl items-center">
+<!-- Left Column: Biography & Numerical Milestones -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-primary font-bold tracking-widest uppercase">Colophon &amp; Persona</span>
+<span class="w-12 h-[1px] bg-outline-variant"></span>
+</div>
+<div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface font-semibold tracking-tight">Abdullah</h2>
+<p class="font-label-md text-label-md text-primary-container font-medium mt-1 uppercase tracking-wide">Graphics Designer &amp; Visual Director</p>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+          I’m Abdullah, a graphics designer focused on creating meaningful visual identities, digital experiences and engaging creative content. I combine clean design, strong visual communication and modern aesthetics to help brands present themselves with confidence.
+        </p>
+<!-- Metrics Grid -->
+<div class="grid grid-cols-3 gap-space-md pt-space-md">
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-[0_4px_16px_rgba(8,8,8,0.03)] flex flex-col">
+<span class="font-display-hero text-headline-xl font-bold text-on-surface tracking-tight">5<span class="text-primary-container">+</span></span>
+<span class="font-label-sm text-label-sm text-secondary mt-1">Years Experience</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-[0_4px_16px_rgba(8,8,8,0.03)] flex flex-col">
+<span class="font-display-hero text-headline-xl font-bold text-on-surface tracking-tight">120<span class="text-primary-container">+</span></span>
+<span class="font-label-sm text-label-sm text-secondary mt-1">Completed Works</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-[0_4px_16px_rgba(8,8,8,0.03)] flex flex-col">
+<span class="font-display-hero text-headline-xl font-bold text-on-surface tracking-tight">99<span class="text-primary-container">%</span></span>
+<span class="font-label-sm text-label-sm text-secondary mt-1">Satisfaction Rate</span>
+</div>
+</div>
+<!-- Capability Tickers -->
+<div class="flex flex-wrap gap-2 pt-space-xs">
+<span class="px-space-md py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">Art Direction</span>
+<span class="px-space-md py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">Editorial Typesetting</span>
+<span class="px-space-md py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">Packaging Systems</span>
+<span class="px-space-md py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">Digital Campaign Kits</span>
+</div>
+</div>
+<!-- Right Column: 3D Studio Portrait Card -->
+<div class="lg:col-span-5 flex justify-center">
+<div class="relative w-full max-w-md">
+<!-- Ambient Glow Rim -->
+<div class="absolute inset-0 bg-primary-container/20 rounded-3xl blur-2xl transform scale-95 -z-10"></div>
+<div class="bg-surface-container-lowest p-space-md rounded-3xl shadow-[0_24px_48px_-10px_rgba(8,8,8,0.08)] flex flex-col">
+<div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-surface-container">
+<img alt="Minimalist stylish modern 3D clay and realistic render portrait of Abdullah, a young creative designer, studio aesthetic, neutral clean lighting, soft purple ambient rim light, soft shadows, isolated against smooth off-white clean studio backdrop, high-end agency look." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VYEsgdgRCEOxb4ZJwY-gj9mr51T73KNuk_0wUVRC8a8aOu7GeMk40OiDuhJrt4CquWTtBQMNXXXh01YiL84zFen7YG8zlL3innrDGmbhTSYaYb2aIjFp7w0DDVUPcLhrXyc2wa8Ws6kCcvyE-2YTUC8W_O4tw7-j99_a5IM17CAkCPYAeOAbsLkagkbG5QCThJSF-S0SmSQVxt_4NY4s8uMjyFqMtifb-Pk8CwweimugwSyiW93_gPhi4">
+<div class="absolute bottom-3 right-3 bg-surface-container-lowest/80 backdrop-blur-md px-space-sm py-1 rounded-full flex items-center gap-1.5 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">HQ • Dhaka / Remote</span>
+</div>
+</div>
+<div class="mt-space-md flex items-center justify-between">
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface">Studio Archive</p>
+<p class="font-label-sm text-label-sm text-secondary">Portrait • Visual Identity Index</p>
+</div>
+<span class="font-label-md text-label-md text-primary font-bold tracking-tight">REF: ABD-26</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- PORTFOLIO SECTION (Interactive 3D Floating Carousel) -->
+<section class="w-full py-space-3xl px-margin md:px-margin-lg overflow-hidden select-none" id="portfolio-section">
+<div class="max-w-[1440px] mx-auto">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-2xl gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="font-label-sm text-label-sm text-primary font-bold tracking-widest uppercase">Archive • 02</span>
+<span class="w-8 h-[1px] bg-outline-variant"></span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface font-semibold tracking-tight">Featured Works</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Curated design systems, digital posters, and visual narratives.</p>
+</div>
+<!-- Header External Link -->
+<div class="flex items-center gap-space-md">
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary hover:text-on-surface font-semibold transition-colors" href="https://behance.net" rel="noopener noreferrer" target="_blank">
+            Behance Profile
+            <span class="material-symbols-outlined text-[16px]">launch</span>
+</a>
+</div>
+</div>
+<!-- 3D Perspective Stage Container -->
+<div class="relative w-full py-space-lg flex justify-center items-center overflow-visible" id="carousel-stage" style="perspective: 1200px;">
+<div class="relative w-full max-w-[500px] h-[540px] flex items-center justify-center" id="carousel-container" style="transform-style: preserve-3d;">
+<!-- Card 0: Aura Creative System -->
+<div class="portfolio-card absolute top-0 left-0 w-full rounded-3xl p-space-md bg-surface-container-lowest border border-white/80 transition-all cursor-pointer flex flex-col justify-between" data-index="0" style="transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s, box-shadow 0.6s, filter 0.6s; transform: translateX(-65%) scale(0.86) rotateY(26deg) translateZ(-60px); opacity: 0.78; z-index: 20; pointer-events: auto; box-shadow: rgba(8, 8, 8, 0.08) 0px 20px 40px -15px; filter: blur(0.5px);">
+<div>
+<div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-surface-container mb-space-md shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Corporate brand identity kit for Aura Creative including letterhead with purple modern typography, business cards, branded pocket notepad, and minimalist paper envelope on smooth gray concrete" src="https://lh3.googleusercontent.com/aida/AEtjO1V3VLyGkT6A1nqme28OkpHoWjcgYtZSlVvZPjFeTjvsdm-t6LWyg5MXTpCuesYmlziiJOVHtra10D_sSGP4LSBwQuQ9R7SxD37z1h0zlhDVzM2Kgge-crUuSVALWZXCDn-qmDew8neVjelcoy6wCCZBV7MuMfyyqXREwC-kqY2QBeqoe9amrlKDf9RfJweIL3M1EqZ82JR65BKbDJLpbBn943ueL1gzPU-c7azWBRSXtl6ZYhR4t9Y7_A46">
+<div class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-1 rounded-full shadow-sm">
+<span class="font-label-sm text-label-sm text-primary font-semibold">Identity System</span>
+</div>
+<div class="absolute top-3 right-3 bg-surface-container-lowest/80 backdrop-blur-md px-2 py-0.5 rounded-full font-label-sm text-secondary">
+            2024
+          </div>
+</div>
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Aura Creative System</h3>
+<span class="w-8 h-8 rounded-full bg-secondary-container/80 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Complete stationery ecosystem, typographic hierarchy, debossed packaging, and luxury brand collateral guidelines.</p>
+</div>
+<div class="mt-space-lg pt-space-sm border-t border-surface-container flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary">Client Work • Brand Architecture</span>
+<a class="font-label-md text-label-md text-primary font-semibold hover:underline inline-flex items-center gap-1" href="https://behance.net" onclick="event.stopPropagation();" rel="noopener noreferrer" target="_blank">
+          Learn More <span class="material-symbols-outlined text-[15px]">arrow_outward</span>
+</a>
+</div>
+</div>
+<!-- Card 1: Synthesis Exhibition -->
+<div class="portfolio-card absolute top-0 left-0 w-full rounded-3xl p-space-md bg-surface-container-lowest border border-white/80 transition-all cursor-pointer flex flex-col justify-between ring-2 ring-primary-container/40" data-index="1" style="transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s, box-shadow 0.6s, filter 0.6s; transform: translateX(0px) scale(1.08) rotateY(0deg) translateZ(0px); opacity: 1; z-index: 30; pointer-events: auto; box-shadow: rgba(108, 59, 255, 0.28) 0px 28px 60px -12px, rgba(0, 0, 0, 0.1) 0px 0px 1px; filter: blur(0px);">
+<div>
+<div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-surface-container mb-space-md shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Synthesis exhibition event poster with bold headline typography, chrome fluid sculpture, event dates November 05-21, location stamp and neon purple ambient background" src="https://lh3.googleusercontent.com/aida/AEtjO1WmRXsoZ2osOQIg9umTgobi23TUxEc8MFxCAWyxPnZdEtFhaFIoKSZUox5tr-5UiT9dqofkWe3x5WT8PMwmDXMR8OyX-mpxnC7fV65JAtU9Ull2mm42L1t8ff93fe6ZpuXuGNsNJL4Ryt5TfKEJwSvR7sfcXoLcxgFboDxmhnUskgBR0W0EcW_EicczIWr4WsGr9SUpOztCS9_ZhpN2EywVo1YrXZ-O3MFzb7-Kzz3XVMU576VOO_eity1T">
+<div class="absolute top-3 left-3 bg-primary-container text-on-primary px-space-sm py-1 rounded-full shadow-sm">
+<span class="font-label-sm text-label-sm font-semibold tracking-wide">Featured Project</span>
+</div>
+<div class="absolute top-3 right-3 bg-surface-container-lowest/80 backdrop-blur-md px-2 py-0.5 rounded-full font-label-sm text-secondary">
+            2024
+          </div>
+</div>
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Synthesis Exhibition</h3>
+<span class="w-8 h-8 rounded-full bg-secondary-container/80 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">brush</span>
+</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Editorial event identity, large-format museum screenprints, and dynamic motion sequences for Instagram campaigns.</p>
+</div>
+<div class="mt-space-lg pt-space-sm border-t border-surface-container flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary">Cultural • Poster &amp; Motion</span>
+<a class="font-label-md text-label-md text-primary font-semibold hover:underline inline-flex items-center gap-1" href="https://behance.net" onclick="event.stopPropagation();" rel="noopener noreferrer" target="_blank">
+          Learn More <span class="material-symbols-outlined text-[15px]">arrow_outward</span>
+</a>
+</div>
+</div>
+<!-- Card 2: Lumina Digital Campaign -->
+<div class="portfolio-card absolute top-0 left-0 w-full rounded-3xl p-space-md bg-surface-container-lowest border border-white/80 transition-all cursor-pointer flex flex-col justify-between" data-index="2" style="transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s, box-shadow 0.6s, filter 0.6s; transform: translateX(65%) scale(0.86) rotateY(-26deg) translateZ(-60px); opacity: 0.78; z-index: 20; pointer-events: auto; box-shadow: rgba(8, 8, 8, 0.08) 0px 20px 40px -15px; filter: blur(0.5px);">
+<div>
+<div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-surface-container mb-space-md shadow-inner">
+<img class="w-full h-full object-cover" data-alt="High-end Lumina luxury skincare promotional digital advertising banner with lavender frosted glass flacons, clean sans-serif typography, soft studio lighting, and subtle shadow depth" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUsI1mtqpOUPIGADmWD_CKHfYhZCSKjV1-71v8MTWYxueSq50F1f1S-VUNc3dj-UnnrBaWCCpOavXvmWGFWJuYai5hX7CRr7DA8IlAzEVr4yKRGtSUnGYWFIupk8x2ilKvBEmMwotPTgWZp2Bwg5e_eITqHXyUH3vy06DV9g3K_0KX9P_jUcXE0eh_3P7tzyQf6lhaFuC7s67QOHKnxTjJpeIugRs09kfowGdZlg7mSR2VTgNkGUGHtA">
+<div class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-1 rounded-full shadow-sm">
+<span class="font-label-sm text-label-sm text-primary font-semibold">Digital Campaign</span>
+</div>
+<div class="absolute top-3 right-3 bg-surface-container-lowest/80 backdrop-blur-md px-2 py-0.5 rounded-full font-label-sm text-secondary">
+            2024
+          </div>
+</div>
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Lumina Digital Campaign</h3>
+<span class="w-8 h-8 rounded-full bg-secondary-container/80 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">ad_units</span>
+</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Multichannel promotional display banners, high-converting digital billboards, and refined beauty ecommerce aesthetics.</p>
+</div>
+<div class="mt-space-lg pt-space-sm border-t border-surface-container flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary">Commercial • Digital Ads</span>
+<a class="font-label-md text-label-md text-primary font-semibold hover:underline inline-flex items-center gap-1" href="https://behance.net" onclick="event.stopPropagation();" rel="noopener noreferrer" target="_blank">
+          Learn More <span class="material-symbols-outlined text-[15px]">arrow_outward</span>
+</a>
+</div>
+</div>
+<!-- Card 3: Visual Velocity -->
+<div class="portfolio-card absolute top-0 left-0 w-full rounded-3xl p-space-md bg-surface-container-lowest border border-white/80 transition-all cursor-pointer flex flex-col justify-between" data-index="3" style="transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s, box-shadow 0.6s, filter 0.6s; transform: translateX(110%) scale(0.72) rotateY(-38deg) translateZ(-140px); opacity: 0.35; z-index: 10; pointer-events: auto; box-shadow: rgba(8, 8, 8, 0.05) 0px 10px 25px -10px; filter: blur(1.5px);">
+<div>
+<div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-surface-container mb-space-md shadow-inner">
+<img class="w-full h-full object-cover" data-alt="High contrast expressive YouTube thumbnail design for Visual Velocity tech documentary with intense spotlighting, metallic 3D typography, angled depth elements, and bold purple color grading" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3jj9LtctXM2dNveKs14Hd8lSAr2gSj-k9nObaAG_Tq4eXvXVLNzeGWasMEDYbGvhguumCxH_g-WXUpY6AfC72pjsYefAuN8lpNkVbMEJdaOHvO43xtlJ7BhEdViFIjV22NxX0KuTuk_k2PM7lENOSXeGDDNZ35yDAjoFQV-1j2KyQLHwxh1PUX1k4Y7eZA343tYF_Ck2RsWCNEtBCWvTQOwDiiYNoOEXy5PkjhSIlYyEWTfp2M7vViQ">
+<div class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-1 rounded-full shadow-sm">
+<span class="font-label-sm text-label-sm text-primary font-semibold">Thumbnail Systems</span>
+</div>
+<div class="absolute top-3 right-3 bg-surface-container-lowest/80 backdrop-blur-md px-2 py-0.5 rounded-full font-label-sm text-secondary">
+            2023
+          </div>
+</div>
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Visual Velocity</h3>
+<span class="w-8 h-8 rounded-full bg-secondary-container/80 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">play_circle</span>
+</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Editorial creator thumbnail engineering, high-contrast typography, and CTR-maximizing spatial compositions.</p>
+</div>
+<div class="mt-space-lg pt-space-sm border-t border-surface-container flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary">Creator Media • High CTR</span>
+<a class="font-label-md text-label-md text-primary font-semibold hover:underline inline-flex items-center gap-1" href="https://behance.net" onclick="event.stopPropagation();" rel="noopener noreferrer" target="_blank">
+          Learn More <span class="material-symbols-outlined text-[15px]">arrow_outward</span>
+</a>
+</div>
+</div>
+<!-- Card 4: Kroma Spatial Architecture -->
+<div class="portfolio-card absolute top-0 left-0 w-full rounded-3xl p-space-md bg-surface-container-lowest border border-white/80 transition-all cursor-pointer flex flex-col justify-between" data-index="4" style="transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s, box-shadow 0.6s, filter 0.6s; transform: translateX(-110%) scale(0.72) rotateY(38deg) translateZ(-140px); opacity: 0.35; z-index: 10; pointer-events: auto; box-shadow: rgba(8, 8, 8, 0.05) 0px 10px 25px -10px; filter: blur(1.5px);">
+<div>
+<div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-surface-container mb-space-md shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Kroma Spatial Architecture 3D rendering and graphic identity showcasing violet gradient geometric structures, minimalist monolith forms, and editorial typesetting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa2352nBcVlox-jk_jC2lXfAAHEOA9D9wTJEOzXXcxbd-xlvWptCs_wZD-gxlDBmURmWz8D4jgO_blPVkpZKkKM_7rLKeZnszxR_q_YtTyHUvNWwVJaHT4ZT_b1-ZilVHQCGvlQS9exQaJBxbFX5uzmFgAkqkZYjGww5B22aNWAtKKMQUNcg-W6fc9G8m1SpEPYS2SO6P4NoW-Ye-VbktzZyYLxFgVgxm7X7BTdP9WK6i6FDBjrZt45Q">
+<div class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-1 rounded-full shadow-sm">
+<span class="font-label-sm text-label-sm text-primary font-semibold">3D Craft &amp; Spatial</span>
+</div>
+<div class="absolute top-3 right-3 bg-surface-container-lowest/80 backdrop-blur-md px-2 py-0.5 rounded-full font-label-sm text-secondary">
+            2024
+          </div>
+</div>
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Kroma Spatial Architecture</h3>
+<span class="w-8 h-8 rounded-full bg-secondary-container/80 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">view_in_ar</span>
+</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Exploratory spatial environments, immersive 3D art direction, and dimensional branding for next-generation platforms.</p>
+</div>
+<div class="mt-space-lg pt-space-sm border-t border-surface-container flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary">3D Visuals • Digital Craft</span>
+<a class="font-label-md text-label-md text-primary font-semibold hover:underline inline-flex items-center gap-1" href="https://behance.net" onclick="event.stopPropagation();" rel="noopener noreferrer" target="_blank">
+          Learn More <span class="material-symbols-outlined text-[15px]">arrow_outward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Navigation Pill Controls & Dot Tracker -->
+<div class="mt-space-xl flex flex-col items-center gap-space-md">
+<div class="inline-flex items-center gap-space-md bg-surface-container-lowest/90 backdrop-blur-md px-space-md py-space-xs rounded-full shadow-[0_10px_30px_-5px_rgba(8,8,8,0.06),0_0_1px_rgba(0,0,0,0.1)]">
+<!-- Prev Pill Button -->
+<button aria-label="Previous Project" class="flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-[#0d0f14] text-white hover:bg-primary-container hover:shadow-[0_8px_20px_-4px_rgba(108,59,255,0.4)] transition-all duration-300 font-label-md text-label-md font-semibold cursor-pointer group" id="carousel-prev-btn">
+<span class="material-symbols-outlined text-[18px] group-hover:-translate-x-0.5 transition-transform">arrow_back</span>
+<span class="">Prev</span>
+</button>
+<!-- Index Counter & Dots -->
+<div class="flex items-center gap-2 px-space-sm" id="carousel-indicators">
+<button aria-label="Slide 1" class="carousel-dot h-2 rounded-full transition-all duration-300 w-2 bg-secondary-fixed-dim" data-dot="0"></button>
+<button aria-label="Slide 2" class="carousel-dot h-2 rounded-full transition-all duration-300 hover:bg-primary/50 w-8 bg-primary-container" data-dot="1"></button>
+<button aria-label="Slide 3" class="carousel-dot h-2 rounded-full transition-all duration-300 w-2 bg-secondary-fixed-dim hover:bg-primary/50" data-dot="2"></button>
+<button aria-label="Slide 4" class="carousel-dot h-2 rounded-full transition-all duration-300 w-2 bg-secondary-fixed-dim hover:bg-primary/50" data-dot="3"></button>
+<button aria-label="Slide 5" class="carousel-dot h-2 rounded-full transition-all duration-300 w-2 bg-secondary-fixed-dim hover:bg-primary/50" data-dot="4"></button>
+</div>
+<!-- Next Pill Button -->
+<button aria-label="Next Project" class="flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-[#0d0f14] text-white hover:bg-primary-container hover:shadow-[0_8px_20px_-4px_rgba(108,59,255,0.4)] transition-all duration-300 font-label-md text-label-md font-semibold cursor-pointer group" id="carousel-next-btn">
+<span class="">Next</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-secondary tracking-wider uppercase">Click side cards or drag to navigate archive</span>
+</div>
+</div>
+</section>
+<!-- SERVICES SECTION (4 Premium Cards Grid) -->
+<section class="w-full bg-surface-container-low py-space-3xl px-margin md:px-margin-lg" id="services-section">
+<div class="max-w-[1440px] mx-auto">
+<!-- Section Header -->
+<div class="text-center max-w-2xl mx-auto mb-space-2xl">
+<div class="inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-secondary-container/60 mb-space-sm">
+<span class="font-label-sm text-label-sm text-primary font-semibold uppercase tracking-wider">Expertise • Specialized Delivery</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface font-semibold tracking-tight">Purpose-Built Design Solutions</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-xs">Disciplined aesthetic standards engineered to increase engagement and elevate market valuation.</p>
+</div>
+<!-- 4 Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+<!-- Service Card 1 -->
+<div class="bg-surface-container-lowest p-space-xl rounded-3xl shadow-[0_16px_36px_-10px_rgba(8,8,8,0.04)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-secondary-container text-primary flex items-center justify-center mb-space-lg">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: &quot;FILL&quot; 1;">corporate_fare</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">01 / Foundation</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold mt-1">Brand Identity</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-sm">
+              Complete visual identity systems that create a consistent and memorable brand presence across physical and digital mediums.
+            </p>
+</div>
+<div class="mt-space-xl pt-space-md flex items-center gap-space-xs font-label-sm text-label-sm text-primary font-semibold">
+<span class="">Logos • Typography • Styleguides</span>
+</div>
+</div>
+<!-- Service Card 2 -->
+<div class="bg-surface-container-lowest p-space-xl rounded-3xl shadow-[0_16px_36px_-10px_rgba(8,8,8,0.04)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-secondary-container text-primary flex items-center justify-center mb-space-lg">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: &quot;FILL&quot; 1;">art_track</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">02 / Engagement</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold mt-1">Social Media Poster Design</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-sm">
+              Eye-catching social media visuals designed to communicate clearly, command scroll attention, and engage modern audiences.
+            </p>
+</div>
+<div class="mt-space-xl pt-space-md flex items-center gap-space-xs font-label-sm text-label-sm text-primary font-semibold">
+<span class="">Instagram • Events • Carousel Sets</span>
+</div>
+</div>
+<!-- Service Card 3 -->
+<div class="bg-surface-container-lowest p-space-xl rounded-3xl shadow-[0_16px_36px_-10px_rgba(8,8,8,0.04)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-secondary-container text-primary flex items-center justify-center mb-space-lg">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: &quot;FILL&quot; 1;">ad_units</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">03 / Promotion</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold mt-1">Banner Design</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-sm">
+              Professional digital and promotional banners designed for marketing campaigns, high-traffic websites and social platforms.
+            </p>
+</div>
+<div class="mt-space-xl pt-space-md flex items-center gap-space-xs font-label-sm text-label-sm text-primary font-semibold">
+<span class="">Web Hero • Google Ads • Billboard Kits</span>
+</div>
+</div>
+<!-- Service Card 4 -->
+<div class="bg-surface-container-lowest p-space-xl rounded-3xl shadow-[0_16px_36px_-10px_rgba(8,8,8,0.04)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-secondary-container text-primary flex items-center justify-center mb-space-lg">
+<span class="material-symbols-outlined text-[30px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_circle</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">04 / Conversion</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold mt-1">Thumbnail Design</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-sm">
+              High-impact thumbnails designed to improve attention, click appeal, and audience retention for creators and media platforms.
+            </p>
+</div>
+<div class="mt-space-xl pt-space-md flex items-center gap-space-xs font-label-sm text-label-sm text-primary font-semibold">
+<span class="">YouTube • Podcasts • Stream Covers</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CONTACT / PROJECT REQUEST SECTION -->
+<section class="w-full py-space-3xl px-margin md:px-margin-lg relative" id="contact-section">
+<div class="max-w-[1440px] mx-auto">
+<div class="bg-surface-container-lowest rounded-3xl p-space-xl md:p-space-2xl shadow-[0_30px_70px_-15px_rgba(8,8,8,0.07)]">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-2xl">
+<!-- Column 1: Context & Assurance -->
+<div class="lg:col-span-5 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider">Start Collaboration</span>
+</div>
+<h2 class="font-display-hero text-headline-xl font-semibold text-on-surface tracking-tight mt-space-xs">
+                Let’s Work Together
+              </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-space-md">
+                Have a project in mind? Send the details and let’s turn your idea into a strong visual experience.
+              </p>
+<!-- Working Process Mini-Timeline -->
+<div class="mt-space-xl space-y-space-md">
+<div class="flex items-start gap-space-sm">
+<span class="w-7 h-7 rounded-full bg-secondary-container text-primary font-label-sm text-label-sm font-bold flex items-center justify-center shrink-0">1</span>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Brief &amp; Scoping</h4>
+<p class="font-body-sm text-body-sm text-secondary">Reviewing your requirements, timelines, and visual expectations within 24 hours.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-sm">
+<span class="w-7 h-7 rounded-full bg-secondary-container text-primary font-label-sm text-label-sm font-bold flex items-center justify-center shrink-0">2</span>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Creative Execution</h4>
+<p class="font-body-sm text-body-sm text-secondary">Iterative prototyping, high-fidelity mockups, and structured feedback rounds.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-sm">
+<span class="w-7 h-7 rounded-full bg-secondary-container text-primary font-label-sm text-label-sm font-bold flex items-center justify-center shrink-0">3</span>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Production Delivery</h4>
+<p class="font-body-sm text-body-sm text-secondary">Complete production-ready assets with full source files and brand guidelines.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Direct Contact Footer -->
+<div class="mt-space-2xl pt-space-lg flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase">Direct Inbox</span>
+<p class="font-headline-sm text-headline-sm text-on-surface font-medium">abdullah.graphics@syntax.design</p>
+</div>
+</div>
+</div>
+<!-- Column 2: Studio Project Request Form -->
+<div class="lg:col-span-7 bg-surface-container-low p-space-lg md:p-space-xl rounded-2xl">
+<form class="space-y-space-md" id="project-request-form">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Name -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-secondary uppercase tracking-wider" for="client-name">Your Name *</label>
+<input class="w-full bg-surface-container-lowest px-space-md py-3 rounded-xl font-body-md text-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container transition-all shadow-sm" id="client-name" placeholder="e.g. Elena Rostova" required="" type="text">
+</div>
+<!-- Service Selection -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-secondary uppercase tracking-wider" for="service-type">Required Service *</label>
+<select class="w-full bg-surface-container-lowest px-space-md py-3 rounded-xl font-body-md text-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container transition-all shadow-sm appearance-none cursor-pointer" id="service-type" required="">
+<option disabled="" selected="" value="">Select service discipline...</option>
+<option value="brand-identity">Brand Identity</option>
+<option value="poster-design">Social Media Poster Design</option>
+<option value="banner-design">Banner Design</option>
+<option value="thumbnail-design">Thumbnail Design</option>
+</select>
+</div>
+</div>
+<!-- Budget & Reference Link -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-secondary uppercase tracking-wider" for="budget">Estimate Budget *</label>
+<select class="w-full bg-surface-container-lowest px-space-md py-3 rounded-xl font-body-md text-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container transition-all shadow-sm cursor-pointer" id="budget" required="">
+<option disabled="" selected="" value="">Select estimated budget...</option>
+<option value="under-1k">$500 – $1,000</option>
+<option value="1k-3k">$1,000 – $3,000</option>
+<option value="3k-5k">$3,000 – $5,000</option>
+<option value="5k-plus">$5,000+</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-secondary uppercase tracking-wider" for="reference">Reference Link</label>
+<input class="w-full bg-surface-container-lowest px-space-md py-3 rounded-xl font-body-md text-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container transition-all shadow-sm" id="reference" placeholder="Figma / Drive / Moodboard URL" type="url">
+</div>
+</div>
+<!-- Project Brief -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-secondary uppercase tracking-wider" for="brief">Project Brief *</label>
+<textarea class="w-full bg-surface-container-lowest px-space-md py-3 rounded-xl font-body-md text-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container transition-all shadow-sm" id="brief" placeholder="Tell me about the goals, scope, and key deliverables for this engagement..." required="" rows="3"></textarea>
+</div>
+<!-- Optional Message -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-secondary uppercase tracking-wider" for="optional-note">Optional Message</label>
+<textarea class="w-full bg-surface-container-lowest px-space-md py-3 rounded-xl font-body-md text-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container transition-all shadow-sm" id="optional-note" placeholder="Deadlines, timezone considerations, or specific artistic preferences..." rows="2"></textarea>
+</div>
+<!-- Submit Button -->
+<div class="pt-space-xs">
+<button class="w-full py-space-sm px-space-xl bg-primary-container hover:bg-primary text-on-primary font-headline-sm text-headline-sm font-semibold rounded-full shadow-[0_12px_28px_-6px_rgba(108,59,255,0.36)] transition-all duration-300 flex items-center justify-center gap-space-xs cursor-pointer" type="submit">
+<span class="">Send Project Request</span>
+<span class="material-symbols-outlined text-[20px]">send</span>
+</button>
+</div>
+<div class="hidden text-center font-label-md text-label-md text-primary pt-2" id="form-feedback">
+                Thank you. Your project request has been logged. Abdullah will respond shortly.
+              </div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- REFINED STUDIO FOOTER STRIP & NETWORKS -->
+<section class="w-full bg-surface-container-low py-space-2xl px-margin md:px-margin-lg">
+<div class="max-w-[1440px] mx-auto flex flex-col gap-space-xl">
+<!-- Top Row: Designation & Social Links -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">Syntax</span>
+<span class="text-secondary font-label-sm text-label-sm">|</span>
+<span class="font-headline-sm text-headline-sm text-primary font-medium">Abdullah — Graphics Designer</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Editorial systems, modern brand identities, and high-impact visual direction.</p>
+</div>
+<!-- Social Links Suite -->
+<div class="flex flex-wrap items-center gap-space-md">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="https://behance.net" rel="noopener noreferrer" target="_blank">
+<span class="">Behance</span>
+</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="https://dribbble.com" rel="noopener noreferrer" target="_blank">
+<span class="">Dribbble</span>
+</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="https://linkedin.com" rel="noopener noreferrer" target="_blank">
+<span class="">LinkedIn</span>
+</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="https://instagram.com" rel="noopener noreferrer" target="_blank">
+<span class="">Instagram</span>
+</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="https://facebook.com" rel="noopener noreferrer" target="_blank">
+<span class="">Facebook</span>
+</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="https://x.com" rel="noopener noreferrer" target="_blank">
+<span class="">X / Twitter</span>
+</a>
+</div>
+</div>
+<!-- Bottom Row: Navigation Indices & Colophon Legal -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-lg">
+<nav class="flex items-center gap-space-lg">
+<a class="font-label-sm text-label-sm text-secondary hover:text-on-surface transition-colors" href="#">Home</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-on-surface transition-colors" href="#about">About</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-on-surface transition-colors" href="#portfolio-section">Portfolio</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-on-surface transition-colors" href="#services-section">Services</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-on-surface transition-colors" href="#contact-section">Contact</a>
+</nav>
+<span class="font-label-sm text-label-sm text-secondary tracking-wide">© 2026 Abdullah. All rights reserved.</span>
+</div>
+</div>
+</section>
+</div></main>
+<footer class="w-full bg-surface-container-low py-space-2xl mt-space-3xl"></footer>
+<!-- Interactive Scripts for 3D Floating Carousel & Form Handling -->
+<script>
+  (function() {
+    // Contact Form handling
+    const form = document.getElementById('project-request-form');
+    const feedback = document.getElementById('form-feedback');
+    
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (feedback) feedback.classList.remove('hidden');
+        form.reset();
+        setTimeout(function() {
+          if (feedback) feedback.classList.add('hidden');
+        }, 6000);
+      });
+    }
+
+    // 3D Floating Carousel Engine
+    const container = document.getElementById('carousel-container');
+    const cards = Array.from(document.querySelectorAll('.portfolio-card'));
+    const prevBtn = document.getElementById('carousel-prev-btn');
+    const nextBtn = document.getElementById('carousel-next-btn');
+    const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+    const totalCards = cards.length;
+    let activeIndex = 1; // Default to Synthesis Exhibition as featured center card
+
+    // Precomputed 3D transform profiles matching user spec
+    const transformStyles = {
+      center: {
+        transform: 'translateX(0) scale(1.08) rotateY(0deg) translateZ(0px)',
+        opacity: '1',
+        zIndex: '30',
+        pointerEvents: 'auto',
+        boxShadow: '0 28px 60px -12px rgba(108, 59, 255, 0.28), 0 0 1px rgba(0,0,0,0.1)',
+        filter: 'blur(0px)'
+      },
+      left1: {
+        transform: 'translateX(-65%) scale(0.86) rotateY(26deg) translateZ(-60px)',
+        opacity: '0.78',
+        zIndex: '20',
+        pointerEvents: 'auto',
+        boxShadow: '0 20px 40px -15px rgba(8, 8, 8, 0.08)',
+        filter: 'blur(0.5px)'
+      },
+      right1: {
+        transform: 'translateX(65%) scale(0.86) rotateY(-26deg) translateZ(-60px)',
+        opacity: '0.78',
+        zIndex: '20',
+        pointerEvents: 'auto',
+        boxShadow: '0 20px 40px -15px rgba(8, 8, 8, 0.08)',
+        filter: 'blur(0.5px)'
+      },
+      left2: {
+        transform: 'translateX(-110%) scale(0.72) rotateY(38deg) translateZ(-140px)',
+        opacity: '0.35',
+        zIndex: '10',
+        pointerEvents: 'auto',
+        boxShadow: '0 10px 25px -10px rgba(8, 8, 8, 0.05)',
+        filter: 'blur(1.5px)'
+      },
+      right2: {
+        transform: 'translateX(110%) scale(0.72) rotateY(-38deg) translateZ(-140px)',
+        opacity: '0.35',
+        zIndex: '10',
+        pointerEvents: 'auto',
+        boxShadow: '0 10px 25px -10px rgba(8, 8, 8, 0.05)',
+        filter: 'blur(1.5px)'
+      },
+      hidden: {
+        transform: 'translateX(0) scale(0.5) translateZ(-200px)',
+        opacity: '0',
+        zIndex: '0',
+        pointerEvents: 'none',
+        filter: 'blur(4px)'
+      }
+    };
+
+    function applyCardStyles(card, styleObj) {
+      card.style.transition = 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s ease, box-shadow 0.6s ease, filter 0.6s ease';
+      card.style.transform = styleObj.transform;
+      card.style.opacity = styleObj.opacity;
+      card.style.zIndex = styleObj.zIndex;
+      card.style.pointerEvents = styleObj.pointerEvents;
+      if (styleObj.boxShadow) card.style.boxShadow = styleObj.boxShadow;
+      if (styleObj.filter) card.style.filter = styleObj.filter;
+    }
+
+    function renderCarousel() {
+      cards.forEach((card, idx) => {
+        // Calculate offset relative to activeIndex in loop
+        let diff = (idx - activeIndex) % totalCards;
+        if (diff > totalCards / 2) diff -= totalCards;
+        if (diff < -totalCards / 2) diff += totalCards;
+
+        if (diff === 0) {
+          applyCardStyles(card, transformStyles.center);
+          card.classList.add('ring-2', 'ring-primary-container/40');
+        } else if (diff === -1) {
+          applyCardStyles(card, transformStyles.left1);
+          card.classList.remove('ring-2', 'ring-primary-container/40');
+        } else if (diff === 1) {
+          applyCardStyles(card, transformStyles.right1);
+          card.classList.remove('ring-2', 'ring-primary-container/40');
+        } else if (diff === -2 || diff === (totalCards - 2)) {
+          applyCardStyles(card, transformStyles.left2);
+          card.classList.remove('ring-2', 'ring-primary-container/40');
+        } else if (diff === 2 || diff === -(totalCards - 2)) {
+          applyCardStyles(card, transformStyles.right2);
+          card.classList.remove('ring-2', 'ring-primary-container/40');
+        } else {
+          applyCardStyles(card, transformStyles.hidden);
+          card.classList.remove('ring-2', 'ring-primary-container/40');
+        }
+      });
+
+      // Update Dots Indicator
+      dots.forEach((dot, dotIdx) => {
+        if (dotIdx === activeIndex) {
+          dot.classList.remove('w-2', 'bg-secondary-fixed-dim');
+          dot.classList.add('w-8', 'bg-primary-container');
+        } else {
+          dot.classList.remove('w-8', 'bg-primary-container');
+          dot.classList.add('w-2', 'bg-secondary-fixed-dim');
+        }
+      });
+    }
+
+    function goNext() {
+      activeIndex = (activeIndex + 1) % totalCards;
+      renderCarousel();
+    }
+
+    function goPrev() {
+      activeIndex = (activeIndex - 1 + totalCards) % totalCards;
+      renderCarousel();
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', goNext);
+    if (prevBtn) prevBtn.addEventListener('click', goPrev);
+
+    // Clicking directly on any visible side card rotates that card to center
+    cards.forEach((card, idx) => {
+      card.addEventListener('click', function(e) {
+        if (idx !== activeIndex) {
+          e.preventDefault();
+          activeIndex = idx;
+          renderCarousel();
+        }
+      });
+    });
+
+    // Dot click direct jump
+    dots.forEach((dot, dotIdx) => {
+      dot.addEventListener('click', function() {
+        activeIndex = dotIdx;
+        renderCarousel();
+      });
+    });
+
+    // Touch / Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const stage = document.getElementById('carousel-stage');
+
+    if (stage) {
+      stage.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      stage.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+
+      function handleSwipe() {
+        const threshold = 40;
+        if (touchEndX < touchStartX - threshold) {
+          goNext();
+        } else if (touchEndX > touchStartX + threshold) {
+          goPrev();
+        }
+      }
+    }
+
+    // Keyboard Arrow navigation when stage in view
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight') {
+        goNext();
+      } else if (e.key === 'ArrowLeft') {
+        goPrev();
+      }
+    });
+
+    // Initial render
+    renderCarousel();
+  })();
+</script>
+
+
+</body></html>
