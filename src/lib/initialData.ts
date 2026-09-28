@@ -62,7 +62,7 @@ export const INITIAL_SITE_SETTINGS: SiteSettings = {
       icon: 'play_circle',
     },
   ],
-  updated_at: new Date().toISOString(),
+  updated_at: '2026-09-01T00:00:00.000Z',
 };
 
 export const INITIAL_PROJECTS: Project[] = [

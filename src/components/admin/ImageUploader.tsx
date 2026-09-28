@@ -6,6 +6,7 @@ interface ImageUploaderProps {
   onChange: (url: string) => void;
   label?: string;
   helperText?: string;
+  maxDimension?: number;
 }
 
 export const ImageUploader: React.FC<ImageUploaderProps> = ({
@@ -13,6 +14,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
   onChange,
   label = 'Cover Image Asset',
   helperText = 'Recommended: 1600×1000px, WEBP, PNG, or JPG (max 10MB)',
+  maxDimension = 1600,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
@@ -27,9 +29,9 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
       return;
     }
 
-    // Validate size (10MB)
-    if (file.size > 10 * 1024 * 1024) {
-      setError('File size exceeds the 10MB limit.');
+    // Validate size (15MB)
+    if (file.size > 15 * 1024 * 1024) {
+      setError('File size exceeds the 15MB limit.');
       return;
     }
 
@@ -37,7 +39,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
     setIsUploading(true);
 
     try {
-      const publicUrl = await uploadAsset(file);
+      const publicUrl = await uploadAsset(file, maxDimension);
       onChange(publicUrl);
     } catch (err: any) {
       setError(err.message || 'Image upload failed.');

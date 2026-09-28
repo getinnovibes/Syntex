@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { Project, Inquiry, SiteSettings, UserProfile } from '../types';
+import { Project, Inquiry, SiteSettings, UserProfile, ToolItem } from '../types';
 import { INITIAL_PROJECTS, INITIAL_INQUIRIES, INITIAL_SITE_SETTINGS } from './initialData';
 
 const supabaseUrl =
@@ -89,6 +89,122 @@ function setLocalSettings(settings: SiteSettings): void {
 }
 
 // -------------------------------------------------------------
+// IMAGE OPTIMIZATION HELPER
+// -------------------------------------------------------------
+
+export async function compressImage(
+  file: File,
+  maxDimension = 1600,
+  quality = 0.85
+): Promise<File | Blob> {
+  if (typeof window === 'undefined') return file;
+  if (!file.type.startsWith('image/') || file.type === 'image/svg+xml') {
+    return file;
+  }
+
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (e) => {
+      const img = new Image();
+      img.src = e.target?.result as string;
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+
+        // Skip compression if already reasonably sized
+        if (width <= maxDimension && height <= maxDimension && file.size < 350 * 1024) {
+          resolve(file);
+          return;
+        }
+
+        if (width > height) {
+          if (width > maxDimension) {
+            height = Math.round((height * maxDimension) / width);
+            width = maxDimension;
+          }
+        } else {
+          if (height > maxDimension) {
+            width = Math.round((width * maxDimension) / height);
+            height = maxDimension;
+          }
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          resolve(file);
+          return;
+        }
+
+        ctx.drawImage(img, 0, 0, width, height);
+        const outType = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              const compressedFile = new File(
+                [blob],
+                file.name.replace(/\.[^/.]+$/, outType === 'image/png' ? '.png' : '.jpg'),
+                { type: outType }
+              );
+              resolve(compressedFile);
+            } else {
+              resolve(file);
+            }
+          },
+          outType,
+          quality
+        );
+      };
+      img.onerror = () => resolve(file);
+    };
+    reader.onerror = () => resolve(file);
+  });
+}
+
+// Valid PostgreSQL columns in the Supabase 'projects' table
+const VALID_PROJECT_COLUMNS = [
+  'id',
+  'title',
+  'slug',
+  'short_description',
+  'full_description',
+  'category',
+  'tags',
+  'client',
+  'year',
+  'role',
+  'services',
+  'cover_image',
+  'featured',
+  'published',
+  'sort_order',
+  'created_at',
+  'updated_at',
+];
+
+// Valid baseline PostgreSQL columns in the Supabase 'site_settings' table
+const VALID_SITE_SETTINGS_COLUMNS = [
+  'id',
+  'site_name',
+  'designer_name',
+  'designer_title',
+  'headline',
+  'bio',
+  'years_experience',
+  'completed_works',
+  'satisfaction_rate',
+  'availability_status',
+  'contact_email',
+  'location',
+  'social_links',
+  'services_list',
+  'updated_at',
+];
+
+// -------------------------------------------------------------
 // DATA SERVICE FUNCTIONS (End-to-End with Supabase + Resilience)
 // -------------------------------------------------------------
 
@@ -101,7 +217,6 @@ export async function fetchProjects(includeUnpublished = false): Promise<Project
       }
       const { data, error } = await query;
       if (!error && data && data.length > 0) {
-        // Map to typed project structure
         const mapped: Project[] = data.map((item: any) => ({
           ...item,
           gallery_images: item.project_images || [],
@@ -149,17 +264,32 @@ export async function saveProject(projectData: Partial<Project>): Promise<Projec
   const isNew = !projectData.id;
   const now = new Date().toISOString();
 
+  // Strip relational fields (project_images, gallery_images) so PostgREST never errors with PGRST204
+  const dbPayload: any = {};
+  for (const col of VALID_PROJECT_COLUMNS) {
+    if (col in projectData) {
+      dbPayload[col] = (projectData as any)[col];
+    }
+  }
+  dbPayload.updated_at = now;
+
+  let resultProject: any = null;
+
   if (isSupabaseConfigured) {
     try {
-      const { gallery_images, ...dbFields } = projectData as any;
-      dbFields.updated_at = now;
-
-      let resultProject: any = null;
-
       if (isNew) {
+        if (!dbPayload.id) dbPayload.id = crypto.randomUUID();
+        if (!dbPayload.slug) {
+          dbPayload.slug = (projectData.title || 'project')
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/\s+/g, '-') + `-${Date.now().toString(36)}`;
+        }
+        if (!dbPayload.created_at) dbPayload.created_at = now;
+
         const { data, error } = await supabase
           .from('projects')
-          .insert([dbFields])
+          .insert([dbPayload])
           .select()
           .single();
         if (error) throw error;
@@ -167,7 +297,7 @@ export async function saveProject(projectData: Partial<Project>): Promise<Projec
       } else {
         const { data, error } = await supabase
           .from('projects')
-          .update(dbFields)
+          .update(dbPayload)
           .eq('id', projectData.id)
           .select()
           .single();
@@ -176,10 +306,9 @@ export async function saveProject(projectData: Partial<Project>): Promise<Projec
       }
 
       // Handle gallery images if supplied
-      if (gallery_images && gallery_images.length > 0 && resultProject?.id) {
-        // Replace or sync
+      if (projectData.gallery_images && projectData.gallery_images.length > 0 && resultProject?.id) {
         await supabase.from('project_images').delete().eq('project_id', resultProject.id);
-        const imagesToInsert = gallery_images.map((img: any, idx: number) => ({
+        const imagesToInsert = projectData.gallery_images.map((img: any, idx: number) => ({
           project_id: resultProject.id,
           storage_path: img.storage_path,
           alt_text: img.alt_text || '',
@@ -188,15 +317,29 @@ export async function saveProject(projectData: Partial<Project>): Promise<Projec
         await supabase.from('project_images').insert(imagesToInsert);
       }
 
-      // Refresh local cache and broadcast update
-      const updatedList = await fetchProjects(true);
-      if (typeof window !== 'undefined') {
-        window.dispatchEvent(new CustomEvent('syntax_data_updated', { detail: { type: 'project', project: resultProject } }));
+      // Update local storage cache and broadcast live update
+      const current = getLocalProjects();
+      const idx = current.findIndex((p) => p.id === resultProject.id);
+      const fullProject: Project = {
+        ...(idx >= 0 ? current[idx] : {}),
+        ...resultProject,
+        gallery_images: projectData.gallery_images || (idx >= 0 ? current[idx].gallery_images : []),
+      };
+      if (idx >= 0) {
+        current[idx] = fullProject;
+      } else {
+        current.push(fullProject);
       }
-      return resultProject;
+      setLocalProjects(current);
+
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(
+          new CustomEvent('syntax_data_updated', { detail: { type: 'project', project: fullProject } })
+        );
+      }
+      return fullProject;
     } catch (err: any) {
-      console.warn('Supabase saveProject notice (saving to resilient store):', err.message || err);
-      // Fall through to resilient local storage save
+      console.error('Supabase saveProject error:', err.message || err);
     }
   }
 
@@ -262,16 +405,25 @@ export async function deleteProject(id: string): Promise<boolean> {
   return true;
 }
 
-export async function uploadAsset(file: File): Promise<string> {
+export async function uploadAsset(file: File, maxDimension = 1600): Promise<string> {
+  // 1. Client-side image compression
+  let fileToUpload: File | Blob = file;
+  try {
+    fileToUpload = await compressImage(file, maxDimension);
+  } catch (err) {
+    console.warn('Compression warning, proceeding with original file:', err);
+  }
+
+  // 2. Upload to Supabase Storage if bucket exists
   if (isSupabaseConfigured) {
     try {
-      const fileExt = file.name.split('.').pop();
+      const fileExt = file.name.split('.').pop() || 'jpg';
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
       const filePath = `uploads/${fileName}`;
 
       const { error: uploadError } = await supabase.storage
         .from('portfolio-assets')
-        .upload(filePath, file, {
+        .upload(filePath, fileToUpload, {
           cacheControl: '3600',
           upsert: true,
         });
@@ -280,19 +432,19 @@ export async function uploadAsset(file: File): Promise<string> {
         const { data } = supabase.storage.from('portfolio-assets').getPublicUrl(filePath);
         if (data?.publicUrl) return data.publicUrl;
       } else {
-        console.warn('Supabase storage notice, using instant local asset:', uploadError.message);
+        console.warn('Supabase storage bucket notice, using instant optimized inline asset:', uploadError.message);
       }
     } catch (err: any) {
       console.warn('Supabase storage fallback:', err?.message || err);
     }
   }
 
-  // Local resilient fallback: base64 Data URL so uploads never fail
+  // 3. Fallback: Compact WebP/JPEG Data URL (persists directly in DB)
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result as string);
     reader.onerror = reject;
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(fileToUpload);
   });
 }
 
@@ -389,20 +541,28 @@ export async function fetchSiteSettings(): Promise<SiteSettings> {
     try {
       const { data, error } = await supabase.from('site_settings').select('*').limit(1).single();
       if (!error && data) {
-        const localTime = local?.updated_at ? new Date(local.updated_at).getTime() : 0;
-        const remoteTime = data?.updated_at ? new Date(data.updated_at).getTime() : 0;
-
-        // If local has newer unsynced changes, preserve local and sync to supabase
-        if (localTime > remoteTime) {
-          supabase.from('site_settings').upsert([local]).then(() => {}, () => {});
-          return local;
+        const rawSocial = Array.isArray(data.social_links) ? data.social_links : [];
+        const metaAvatar = rawSocial.find((l: any) => l.platform === '__meta_avatar_url__')?.url;
+        const metaToolkitRaw = rawSocial.find((l: any) => l.platform === '__meta_toolkit__')?.url;
+        let metaToolkit: ToolItem[] | undefined;
+        if (metaToolkitRaw) {
+          try {
+            metaToolkit = JSON.parse(metaToolkitRaw);
+          } catch {}
         }
+
+        const cleanSocialLinks = rawSocial.filter((l: any) => !l.platform.startsWith('__meta_'));
 
         const merged: SiteSettings = {
           ...local,
           ...data,
-          toolkit: data.toolkit && Array.isArray(data.toolkit) && data.toolkit.length > 0 ? data.toolkit : local.toolkit,
-          avatar_url: data.avatar_url || local.avatar_url,
+          social_links: cleanSocialLinks.length > 0 ? cleanSocialLinks : local.social_links,
+          toolkit: (data.toolkit && Array.isArray(data.toolkit) && data.toolkit.length > 0)
+            ? data.toolkit
+            : (metaToolkit && metaToolkit.length > 0)
+              ? metaToolkit
+              : local.toolkit,
+          avatar_url: data.avatar_url || metaAvatar || local.avatar_url || '/assets/portrait.png',
         };
         setLocalSettings(merged);
         return merged;
@@ -422,19 +582,62 @@ export async function saveSiteSettings(settings: Partial<SiteSettings>): Promise
     updated_at: new Date().toISOString(),
   };
 
+  // Real social links (filter out internal metadata entries)
+  const realSocialLinks = (merged.social_links || []).filter(
+    (l) => !l.platform.startsWith('__meta_')
+  );
+
+  // Encode avatar_url and toolkit into social_links metadata so it always persists to Supabase
+  // even if avatar_url / toolkit columns don't exist in PostgreSQL table yet!
+  const socialLinksWithMeta = [
+    ...realSocialLinks,
+    ...(merged.avatar_url ? [{ platform: '__meta_avatar_url__', url: merged.avatar_url }] : []),
+    ...(merged.toolkit ? [{ platform: '__meta_toolkit__', url: JSON.stringify(merged.toolkit) }] : []),
+  ];
+
   // 1. Immediately persist to resilient local cache
-  setLocalSettings(merged);
+  setLocalSettings({
+    ...merged,
+    social_links: realSocialLinks,
+  });
 
   // 2. Dispatch real-time live event so all views update instantaneously
   if (typeof window !== 'undefined') {
     window.dispatchEvent(new CustomEvent('syntax_data_updated', { detail: { type: 'settings', data: merged } }));
   }
 
-  // 3. Sync to Supabase in background
+  // 3. Sync to Supabase database
   if (isSupabaseConfigured) {
     try {
-      const { error } = await supabase.from('site_settings').upsert([merged]);
-      if (error) console.warn('Supabase saveSiteSettings notice:', error.message);
+      // First attempt: try saving with native avatar_url & toolkit columns + embedded metadata
+      const payloadWithAll: any = {
+        ...merged,
+        social_links: socialLinksWithMeta,
+      };
+
+      const { error: firstErr } = await supabase.from('site_settings').upsert([payloadWithAll]);
+      if (firstErr) {
+        // If Supabase complains about missing avatar_url or toolkit column (PGRST204)
+        if (firstErr.code === 'PGRST204' || firstErr.message?.includes('schema cache')) {
+          // Build safe payload with only baseline columns known to exist
+          const safePayload: any = {};
+          for (const col of VALID_SITE_SETTINGS_COLUMNS) {
+            if (col in merged) {
+              safePayload[col] = (merged as any)[col];
+            }
+          }
+          // Include embedded metadata in social_links
+          safePayload.social_links = socialLinksWithMeta;
+          safePayload.updated_at = merged.updated_at;
+
+          const { error: retryErr } = await supabase.from('site_settings').upsert([safePayload]);
+          if (retryErr) {
+            console.error('Supabase saveSiteSettings retry error:', retryErr);
+          }
+        } else {
+          console.error('Supabase saveSiteSettings error:', firstErr);
+        }
+      }
     } catch (err) {
       console.warn('Supabase saveSiteSettings notice:', err);
     }

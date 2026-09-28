@@ -450,11 +450,16 @@ export const AdminSettingsPage: React.FC = () => {
                     onChange={async (url) => {
                       const updated = { ...proj, cover_image: url };
                       setProjects((prev) => prev.map((p) => (p.id === proj.id ? updated : p)));
-                      await saveProject(updated);
-                      setToastMessage(`Photo updated live for "${proj.title}"!`);
+                      try {
+                        await saveProject(updated);
+                        setToastMessage(`Photo updated live for "${proj.title}"!`);
+                      } catch (err: any) {
+                        setToastMessage(`Error updating photo: ${err.message}`);
+                      }
                     }}
                     label={`Slide 0${idx + 1} Photo`}
                     helperText="Upload or change this slide's photo. Recommended: 1600×1000px"
+                    maxDimension={1600}
                   />
 
                   {/* Title & Category inputs */}
@@ -571,9 +576,19 @@ export const AdminSettingsPage: React.FC = () => {
           <div className="max-w-md">
             <ImageUploader
               value={settings.avatar_url || '/assets/portrait.png'}
-              onChange={(url) => setSettings({ ...settings, avatar_url: url })}
+              onChange={async (url) => {
+                const updated = { ...settings, avatar_url: url };
+                setSettings(updated);
+                try {
+                  await saveSiteSettings(updated);
+                  setToastMessage('Studio portrait photo updated and published live!');
+                } catch (err: any) {
+                  setToastMessage(`Photo save notice: ${err.message}`);
+                }
+              }}
               label="Studio Portrait Photo"
               helperText="Recommended: 800×800px or 1000×1000px square (PNG, WEBP, or JPG)"
+              maxDimension={1000}
             />
           </div>
         </div>

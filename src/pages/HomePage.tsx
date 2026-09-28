@@ -7,7 +7,7 @@ import { PerspectiveCarousel } from '../components/portfolio/PerspectiveCarousel
 import { AboutSection } from '../components/portfolio/AboutSection';
 import { ServicesSection } from '../components/portfolio/ServicesSection';
 import { ContactSection } from '../components/portfolio/ContactSection';
-import { fetchProjects, fetchSiteSettings } from '../lib/supabase';
+import { fetchProjects, fetchSiteSettings, supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Project, SiteSettings } from '../types';
 
 export const HomePage: React.FC = () => {
@@ -39,9 +39,27 @@ export const HomePage: React.FC = () => {
 
     window.addEventListener('syntax_data_updated', handleUpdate);
     window.addEventListener('storage', handleUpdate);
+
+    // Supabase Realtime multi-device subscription
+    let realtimeChannel: any = null;
+    if (isSupabaseConfigured) {
+      realtimeChannel = supabase
+        .channel('homepage_live_sync')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'site_settings' }, () => {
+          loadData();
+        })
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'projects' }, () => {
+          loadData();
+        })
+        .subscribe();
+    }
+
     return () => {
       window.removeEventListener('syntax_data_updated', handleUpdate);
       window.removeEventListener('storage', handleUpdate);
+      if (realtimeChannel) {
+        supabase.removeChannel(realtimeChannel);
+      }
     };
   }, []);
 
