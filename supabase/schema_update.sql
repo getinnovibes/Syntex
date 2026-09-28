@@ -6,6 +6,9 @@
 -- 1. ADD MISSING COLUMNS TO SITE_SETTINGS TABLE
 ALTER TABLE public.site_settings ADD COLUMN IF NOT EXISTS avatar_url TEXT;
 ALTER TABLE public.site_settings ADD COLUMN IF NOT EXISTS toolkit JSONB DEFAULT '[]'::jsonb;
+ALTER TABLE public.site_settings ADD COLUMN IF NOT EXISTS hero_card_left JSONB DEFAULT '{}'::jsonb;
+ALTER TABLE public.site_settings ADD COLUMN IF NOT EXISTS hero_card_right JSONB DEFAULT '{}'::jsonb;
+ALTER TABLE public.site_settings ADD COLUMN IF NOT EXISTS hero_specimen JSONB DEFAULT '{}'::jsonb;
 
 -- 2. CREATE PORTFOLIO-ASSETS STORAGE BUCKET FOR PHOTO UPLOADS
 INSERT INTO storage.buckets (id, name, public, file_size_limit, allowed_mime_types)

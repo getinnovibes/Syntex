@@ -381,6 +381,338 @@ export const AdminSettingsPage: React.FC = () => {
         </div>
 
         {/* ========================================================================= */}
+        {/* 2.5 HERO "LIVE SPECIMEN" & 2 SHOWCASE PHOTOS (Direct user request)         */}
+        {/* ========================================================================= */}
+        <div className="bg-surface-container-lowest p-6 md:p-8 rounded-3xl border border-outline-variant/30 shadow-sm space-y-6">
+          <div className="border-b border-outline-variant/20 pb-4">
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-primary text-[24px]">photo_library</span>
+              <h2 className="font-headline-sm text-lg md:text-xl font-semibold text-on-surface">
+                Hero "Live Specimen" & Floating Showcase Photos (2 Photos)
+              </h2>
+            </div>
+            <p className="font-body-sm text-xs md:text-sm text-secondary mt-1">
+              Directly change the 2 floating showcase photos (Left Photo & Right Photo) and customize the center "Live Specimen" badge card shown in your Hero section on desktop and mobile.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* 1. Left Showcase Card (Photo 1) */}
+            <div className="p-5 rounded-2xl bg-surface-container-low/40 border border-outline-variant/30 space-y-4">
+              <div className="flex items-center justify-between border-b border-outline-variant/20 pb-2.5">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-primary" />
+                  <span className="font-headline-sm text-sm font-semibold text-on-surface">
+                    Left Floating Photo (Showcase 01)
+                  </span>
+                </div>
+                <span className="text-[11px] text-secondary bg-surface-container px-2 py-0.5 rounded-full font-medium">
+                  Hero Left Photo
+                </span>
+              </div>
+
+              {/* Photo Uploader */}
+              <ImageUploader
+                value={settings.hero_card_left?.image || '/assets/aura-stationery.png'}
+                onChange={async (url) => {
+                  const updated = {
+                    ...settings,
+                    hero_card_left: {
+                      ...(settings.hero_card_left || {}),
+                      image: url,
+                    },
+                  };
+                  setSettings(updated);
+                  try {
+                    await saveSiteSettings(updated);
+                    setToastMessage('Left showcase photo updated and saved live!');
+                  } catch (err: any) {
+                    setToastMessage(`Error saving photo: ${err.message}`);
+                  }
+                }}
+                label="Left Card Photo"
+                helperText="Upload or change left floating photo (Recommended: 800×600px)"
+                maxDimension={1600}
+              />
+
+              {/* Title & Subtitle */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div className="flex flex-col gap-1">
+                  <label className="text-[11px] uppercase tracking-wider text-secondary font-medium">
+                    Card Title
+                  </label>
+                  <input
+                    type="text"
+                    value={settings.hero_card_left?.title ?? 'Aura Creative'}
+                    onChange={(e) =>
+                      setSettings({
+                        ...settings,
+                        hero_card_left: {
+                          ...(settings.hero_card_left || {}),
+                          title: e.target.value,
+                        },
+                      })
+                    }
+                    placeholder="e.g. Aura Creative"
+                    className="bg-surface-container-lowest px-3 py-2 rounded-xl text-sm font-medium text-on-surface border border-outline-variant/40 focus:border-primary outline-none"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <label className="text-[11px] uppercase tracking-wider text-secondary font-medium">
+                    Subtitle / Category
+                  </label>
+                  <input
+                    type="text"
+                    value={settings.hero_card_left?.subtitle ?? 'Identity System • 2024'}
+                    onChange={(e) =>
+                      setSettings({
+                        ...settings,
+                        hero_card_left: {
+                          ...(settings.hero_card_left || {}),
+                          subtitle: e.target.value,
+                        },
+                      })
+                    }
+                    placeholder="e.g. Identity System • 2024"
+                    className="bg-surface-container-lowest px-3 py-2 rounded-xl text-sm font-medium text-on-surface border border-outline-variant/40 focus:border-primary outline-none"
+                  />
+                </div>
+              </div>
+
+              {/* Target Project Link / Slug */}
+              <div className="flex flex-col gap-1">
+                <label className="text-[11px] uppercase tracking-wider text-secondary font-medium">
+                  Link / Project URL
+                </label>
+                <input
+                  type="text"
+                  value={settings.hero_card_left?.link ?? '/projects/aura-creative-system'}
+                  onChange={(e) =>
+                    setSettings({
+                      ...settings,
+                      hero_card_left: {
+                        ...(settings.hero_card_left || {}),
+                        link: e.target.value,
+                      },
+                    })
+                  }
+                  placeholder="e.g. /projects/aura-creative-system or https://..."
+                  className="bg-surface-container-lowest px-3 py-2 rounded-xl text-xs text-on-surface border border-outline-variant/40 focus:border-primary outline-none font-mono"
+                />
+              </div>
+            </div>
+
+            {/* 2. Right Showcase Card (Photo 2) */}
+            <div className="p-5 rounded-2xl bg-surface-container-low/40 border border-outline-variant/30 space-y-4">
+              <div className="flex items-center justify-between border-b border-outline-variant/20 pb-2.5">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-primary" />
+                  <span className="font-headline-sm text-sm font-semibold text-on-surface">
+                    Right Floating Photo (Showcase 02)
+                  </span>
+                </div>
+                <span className="text-[11px] text-secondary bg-surface-container px-2 py-0.5 rounded-full font-medium">
+                  Hero Right Photo
+                </span>
+              </div>
+
+              {/* Photo Uploader */}
+              <ImageUploader
+                value={settings.hero_card_right?.image || '/assets/synthesis-poster.png'}
+                onChange={async (url) => {
+                  const updated = {
+                    ...settings,
+                    hero_card_right: {
+                      ...(settings.hero_card_right || {}),
+                      image: url,
+                    },
+                  };
+                  setSettings(updated);
+                  try {
+                    await saveSiteSettings(updated);
+                    setToastMessage('Right showcase photo updated and saved live!');
+                  } catch (err: any) {
+                    setToastMessage(`Error saving photo: ${err.message}`);
+                  }
+                }}
+                label="Right Card Photo"
+                helperText="Upload or change right floating photo (Recommended: 800×600px)"
+                maxDimension={1600}
+              />
+
+              {/* Title & Subtitle */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div className="flex flex-col gap-1">
+                  <label className="text-[11px] uppercase tracking-wider text-secondary font-medium">
+                    Card Title
+                  </label>
+                  <input
+                    type="text"
+                    value={settings.hero_card_right?.title ?? 'Synthesis Exhibition'}
+                    onChange={(e) =>
+                      setSettings({
+                        ...settings,
+                        hero_card_right: {
+                          ...(settings.hero_card_right || {}),
+                          title: e.target.value,
+                        },
+                      })
+                    }
+                    placeholder="e.g. Synthesis Exhibition"
+                    className="bg-surface-container-lowest px-3 py-2 rounded-xl text-sm font-medium text-on-surface border border-outline-variant/40 focus:border-primary outline-none"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <label className="text-[11px] uppercase tracking-wider text-secondary font-medium">
+                    Subtitle / Category
+                  </label>
+                  <input
+                    type="text"
+                    value={settings.hero_card_right?.subtitle ?? 'Print & Motion • 2024'}
+                    onChange={(e) =>
+                      setSettings({
+                        ...settings,
+                        hero_card_right: {
+                          ...(settings.hero_card_right || {}),
+                          subtitle: e.target.value,
+                        },
+                      })
+                    }
+                    placeholder="e.g. Print & Motion • 2024"
+                    className="bg-surface-container-lowest px-3 py-2 rounded-xl text-sm font-medium text-on-surface border border-outline-variant/40 focus:border-primary outline-none"
+                  />
+                </div>
+              </div>
+
+              {/* Target Project Link / Slug */}
+              <div className="flex flex-col gap-1">
+                <label className="text-[11px] uppercase tracking-wider text-secondary font-medium">
+                  Link / Project URL
+                </label>
+                <input
+                  type="text"
+                  value={settings.hero_card_right?.link ?? '/projects/synthesis-exhibition'}
+                  onChange={(e) =>
+                    setSettings({
+                      ...settings,
+                      hero_card_right: {
+                        ...(settings.hero_card_right || {}),
+                        link: e.target.value,
+                      },
+                    })
+                  }
+                  placeholder="e.g. /projects/synthesis-exhibition or https://..."
+                  className="bg-surface-container-lowest px-3 py-2 rounded-xl text-xs text-on-surface border border-outline-variant/40 focus:border-primary outline-none font-mono"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* 3. Center "Live Specimen" Anchor Text Editor */}
+          <div className="p-5 rounded-2xl bg-surface-container-low/40 border border-outline-variant/30 space-y-4">
+            <div className="flex items-center justify-between border-b border-outline-variant/20 pb-2.5">
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary text-[20px]">badge</span>
+                <span className="font-headline-sm text-sm font-semibold text-on-surface">
+                  Center "Live Specimen" Badge & Text
+                </span>
+              </div>
+              <span className="text-[11px] text-secondary bg-surface-container px-2 py-0.5 rounded-full font-medium">
+                Center Anchor Card
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="flex flex-col gap-1">
+                <label className="text-[11px] uppercase tracking-wider text-secondary font-medium">
+                  Badge Label
+                </label>
+                <input
+                  type="text"
+                  value={settings.hero_specimen?.badge ?? 'Live Specimen'}
+                  onChange={(e) =>
+                    setSettings({
+                      ...settings,
+                      hero_specimen: {
+                        ...(settings.hero_specimen || {}),
+                        badge: e.target.value,
+                      },
+                    })
+                  }
+                  placeholder="e.g. Live Specimen"
+                  className="bg-surface-container-lowest px-3.5 py-2 rounded-xl font-body-md text-sm text-on-surface border border-outline-variant/40 focus:border-primary outline-none"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label className="text-[11px] uppercase tracking-wider text-secondary font-medium">
+                  Status / Counter
+                </label>
+                <input
+                  type="text"
+                  value={settings.hero_specimen?.counter ?? '01 / 05 Curated'}
+                  onChange={(e) =>
+                    setSettings({
+                      ...settings,
+                      hero_specimen: {
+                        ...(settings.hero_specimen || {}),
+                        counter: e.target.value,
+                      },
+                    })
+                  }
+                  placeholder="e.g. 01 / 05 Curated"
+                  className="bg-surface-container-lowest px-3.5 py-2 rounded-xl font-body-md text-sm text-on-surface border border-outline-variant/40 focus:border-primary outline-none"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1 sm:col-span-2">
+                <label className="text-[11px] uppercase tracking-wider text-secondary font-medium">
+                  Headline Title
+                </label>
+                <input
+                  type="text"
+                  value={settings.hero_specimen?.title ?? 'Typographic Systems & Spatial Balance'}
+                  onChange={(e) =>
+                    setSettings({
+                      ...settings,
+                      hero_specimen: {
+                        ...(settings.hero_specimen || {}),
+                        title: e.target.value,
+                      },
+                    })
+                  }
+                  placeholder="e.g. Typographic Systems & Spatial Balance"
+                  className="bg-surface-container-lowest px-3.5 py-2 rounded-xl font-body-md text-sm text-on-surface border border-outline-variant/40 focus:border-primary outline-none"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1 sm:col-span-2">
+                <label className="text-[11px] uppercase tracking-wider text-secondary font-medium">
+                  Description / Tagline
+                </label>
+                <textarea
+                  rows={2}
+                  value={settings.hero_specimen?.subtitle ?? 'Harmonizing brand narrative with architectural layout structures.'}
+                  onChange={(e) =>
+                    setSettings({
+                      ...settings,
+                      hero_specimen: {
+                        ...(settings.hero_specimen || {}),
+                        subtitle: e.target.value,
+                      },
+                    })
+                  }
+                  placeholder="e.g. Harmonizing brand narrative with architectural layout structures."
+                  className="bg-surface-container-lowest px-3.5 py-2 rounded-xl font-body-md text-sm text-on-surface border border-outline-variant/40 focus:border-primary outline-none"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
         {/* 3. 3D PERSPECTIVE CAROUSEL PHOTOS & SLIDES (Direct user request)          */}
         {/* ========================================================================= */}
         <div className="bg-surface-container-lowest p-6 md:p-8 rounded-3xl border border-outline-variant/30 shadow-sm space-y-6">

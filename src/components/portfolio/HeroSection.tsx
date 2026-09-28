@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ToolItem, Project } from '../../types';
+import { ToolItem, Project, HeroCard, HeroSpecimen } from '../../types';
 
 interface HeroSectionProps {
   headline?: string;
@@ -8,6 +8,9 @@ interface HeroSectionProps {
   availabilityStatus?: string;
   toolkit?: ToolItem[];
   featuredProjects?: Project[];
+  heroCardLeft?: HeroCard;
+  heroCardRight?: HeroCard;
+  heroSpecimen?: HeroSpecimen;
 }
 
 const DEFAULT_TOOLKIT: ToolItem[] = [
@@ -23,10 +26,55 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   availabilityStatus = 'Independent Practice • Available for Q2/Q3 Projects',
   toolkit = DEFAULT_TOOLKIT,
   featuredProjects = [],
+  heroCardLeft,
+  heroCardRight,
+  heroSpecimen,
 }) => {
   const activeTools = toolkit && toolkit.length > 0 ? toolkit : DEFAULT_TOOLKIT;
   const projectLeft = featuredProjects[0];
   const projectRight = featuredProjects[1] || featuredProjects[0];
+
+  // Left card values with fallback to featured project or default asset
+  const cardLeftImage = heroCardLeft?.image || projectLeft?.cover_image || '/assets/aura-stationery.png';
+  const cardLeftTitle = heroCardLeft?.title || projectLeft?.title || 'Aura Creative';
+  const cardLeftSubtitle =
+    heroCardLeft?.subtitle || (projectLeft ? `${projectLeft.category} • ${projectLeft.year}` : 'Identity System • 2024');
+  const cardLeftLink =
+    heroCardLeft?.link || (projectLeft ? `/projects/${projectLeft.slug}` : '/projects/aura-creative-system');
+
+  // Right card values with fallback to featured project or default asset
+  const cardRightImage = heroCardRight?.image || projectRight?.cover_image || '/assets/synthesis-poster.png';
+  const cardRightTitle = heroCardRight?.title || projectRight?.title || 'Synthesis Exhibition';
+  const cardRightSubtitle =
+    heroCardRight?.subtitle || (projectRight ? `${projectRight.category} • ${projectRight.year}` : 'Print & Motion • 2024');
+  const cardRightLink =
+    heroCardRight?.link || (projectRight ? `/projects/${projectRight.slug}` : '/projects/synthesis-exhibition');
+
+  // Center Live Specimen Anchor values
+  const specimenBadge = heroSpecimen?.badge || 'Live Specimen';
+  const specimenCounter = heroSpecimen?.counter || '01 / 05 Curated';
+  const specimenTitle = heroSpecimen?.title || 'Typographic Systems & Spatial Balance';
+  const specimenSubtitle =
+    heroSpecimen?.subtitle || 'Harmonizing brand narrative with architectural layout structures.';
+
+  const renderCardWrapper = (
+    link: string,
+    children: React.ReactNode,
+    className: string
+  ) => {
+    if (link.startsWith('http')) {
+      return (
+        <a href={link} target="_blank" rel="noopener noreferrer" className={className}>
+          {children}
+        </a>
+      );
+    }
+    return (
+      <Link to={link} className={className}>
+        {children}
+      </Link>
+    );
+  };
 
   return (
     <section className="relative w-full overflow-hidden px-6 md:px-margin-lg pt-8 md:pt-space-xl pb-16 md:pb-space-3xl flex flex-col items-center text-center">
@@ -91,48 +139,49 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
       {/* Floating Perspective Project Previews (Desktop) */}
       <div className="relative w-full max-w-6xl mt-12 md:mt-space-2xl min-h-[380px] hidden md:block">
-        {/* Floating Card Left */}
-        <Link
-          to={`/projects/${projectLeft?.slug || 'aura-creative-system'}`}
-          className="absolute left-4 top-4 w-72 rounded-2xl bg-surface-container-lowest p-space-sm shadow-[0_24px_50px_-12px_rgba(8,8,8,0.12)] border border-outline-variant/40 transform -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500 z-10 text-left block"
-        >
-          <div className="w-full h-44 rounded-xl overflow-hidden bg-surface-container">
-            <img
-              className="w-full h-full object-cover"
-              alt={projectLeft?.title || 'Aura Creative luxury corporate stationery mockup'}
-              src={projectLeft?.cover_image || '/assets/aura-stationery.png'}
-            />
-          </div>
-          <div className="pt-space-sm flex items-center justify-between">
-            <div>
-              <p className="font-headline-sm text-headline-sm text-on-surface truncate max-w-[190px]">
-                {projectLeft?.title || 'Aura Creative'}
-              </p>
-              <p className="font-label-sm text-label-sm text-secondary truncate max-w-[190px]">
-                {projectLeft ? `${projectLeft.category} • ${projectLeft.year}` : 'Identity System • 2024'}
-              </p>
+        {/* Floating Card Left (Editable Photo 1) */}
+        {renderCardWrapper(
+          cardLeftLink,
+          <>
+            <div className="w-full h-44 rounded-xl overflow-hidden bg-surface-container">
+              <img
+                className="w-full h-full object-cover"
+                alt={cardLeftTitle}
+                src={cardLeftImage}
+              />
             </div>
-            <span className="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center text-primary shrink-0">
-              <span className="material-symbols-outlined text-[16px]">north_east</span>
-            </span>
-          </div>
-        </Link>
+            <div className="pt-space-sm flex items-center justify-between">
+              <div>
+                <p className="font-headline-sm text-headline-sm text-on-surface truncate max-w-[190px]">
+                  {cardLeftTitle}
+                </p>
+                <p className="font-label-sm text-label-sm text-secondary truncate max-w-[190px]">
+                  {cardLeftSubtitle}
+                </p>
+              </div>
+              <span className="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center text-primary shrink-0">
+                <span className="material-symbols-outlined text-[16px]">north_east</span>
+              </span>
+            </div>
+          </>,
+          'absolute left-4 top-4 w-72 rounded-2xl bg-surface-container-lowest p-space-sm shadow-[0_24px_50px_-12px_rgba(8,8,8,0.12)] border border-outline-variant/40 transform -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-500 z-10 text-left block'
+        )}
 
-        {/* Center Minimal Specimen Anchor */}
+        {/* Center Minimal Specimen Anchor (Editable Text & Badge) */}
         <div className="absolute left-1/2 -translate-x-1/2 top-12 w-80 rounded-2xl bg-surface-container-lowest/90 backdrop-blur-xl p-space-md shadow-[0_30px_60px_-15px_rgba(108,59,255,0.12)] border border-outline-variant/40 z-20 text-left">
           <div className="flex items-center justify-between pb-space-xs">
             <span className="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider">
-              Live Specimen
+              {specimenBadge}
             </span>
             <span className="inline-flex items-center gap-1 font-label-sm text-label-sm text-secondary">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary-container" /> Curated
+              <span className="w-1.5 h-1.5 rounded-full bg-primary-container" /> {specimenCounter}
             </span>
           </div>
           <p className="font-headline-md text-headline-md font-semibold text-on-surface tracking-tight mt-1">
-            Typographic Systems & Spatial Balance
+            {specimenTitle}
           </p>
-          <p className="font-body-sm text-body-sm text-on-surface-variant mt-2">
-            Harmonizing brand narrative with architectural layout structures.
+          <p className="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">
+            {specimenSubtitle}
           </p>
           <div className="mt-space-md pt-space-xs flex items-center justify-between font-label-sm text-label-sm text-secondary border-t border-outline-variant/20">
             <span>01 / 05 Curated</span>
@@ -142,66 +191,120 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
         </div>
 
-        {/* Floating Card Right */}
-        <Link
-          to={`/projects/${projectRight?.slug || 'synthesis-exhibition'}`}
-          className="absolute right-4 top-2 w-72 rounded-2xl bg-surface-container-lowest p-space-sm shadow-[0_24px_50px_-12px_rgba(8,8,8,0.12)] border border-outline-variant/40 transform rotate-4 hover:rotate-0 hover:scale-105 transition-all duration-500 z-10 text-left block"
-        >
-          <div className="w-full h-44 rounded-xl overflow-hidden bg-surface-container">
-            <img
-              className="w-full h-full object-cover"
-              alt={projectRight?.title || 'Synthesis digital art exhibition poster'}
-              src={projectRight?.cover_image || '/assets/synthesis-poster.png'}
-            />
-          </div>
-          <div className="pt-space-sm flex items-center justify-between">
-            <div>
-              <p className="font-headline-sm text-headline-sm text-on-surface truncate max-w-[190px]">
-                {projectRight?.title || 'Synthesis Exhibition'}
-              </p>
-              <p className="font-label-sm text-label-sm text-secondary truncate max-w-[190px]">
-                {projectRight ? `${projectRight.category} • ${projectRight.year}` : 'Print & Motion • 2024'}
-              </p>
+        {/* Floating Card Right (Editable Photo 2) */}
+        {renderCardWrapper(
+          cardRightLink,
+          <>
+            <div className="w-full h-44 rounded-xl overflow-hidden bg-surface-container">
+              <img
+                className="w-full h-full object-cover"
+                alt={cardRightTitle}
+                src={cardRightImage}
+              />
             </div>
-            <span className="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center text-primary shrink-0">
-              <span className="material-symbols-outlined text-[16px]">north_east</span>
-            </span>
-          </div>
-        </Link>
-      </div>
-
-      {/* Mobile Stacked Preview Cards */}
-      <div className="w-full flex flex-col gap-4 mt-8 md:hidden">
-        <Link
-          to={`/projects/${projectLeft?.slug || 'synthesis-exhibition'}`}
-          className="w-full rounded-2xl bg-surface-container-lowest p-3 shadow-[0_20px_40px_-15px_rgba(8,8,8,0.06)] border border-outline-variant/30 overflow-hidden text-left"
-        >
-          <div className="relative h-56 w-full rounded-xl overflow-hidden bg-surface-container">
-            <img
-              className="w-full h-full object-cover"
-              alt={projectLeft?.title || 'Featured project preview'}
-              src={projectLeft?.cover_image || '/assets/synthesis-poster.png'}
-            />
-            <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md">
-              <span className="font-label-sm text-[10px] text-primary uppercase font-bold tracking-wider">
-                Featured
+            <div className="pt-space-sm flex items-center justify-between">
+              <div>
+                <p className="font-headline-sm text-headline-sm text-on-surface truncate max-w-[190px]">
+                  {cardRightTitle}
+                </p>
+                <p className="font-label-sm text-label-sm text-secondary truncate max-w-[190px]">
+                  {cardRightSubtitle}
+                </p>
+              </div>
+              <span className="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center text-primary shrink-0">
+                <span className="material-symbols-outlined text-[16px]">north_east</span>
               </span>
             </div>
-          </div>
-          <div className="flex items-center justify-between p-2 pt-3">
-            <div>
-              <h3 className="font-headline-sm text-headline-sm text-on-surface">
-                {projectLeft?.title || 'Synthesis Exhibition'}
-              </h3>
-              <p className="font-body-sm text-body-sm text-on-surface-variant">
-                {projectLeft?.short_description || 'Kinetic Graphic Posters & Editorial'}
-              </p>
-            </div>
-            <span className="w-9 h-9 rounded-full bg-secondary-container/50 flex items-center justify-center text-primary shrink-0">
-              <span className="material-symbols-outlined text-[20px]">north_east</span>
+          </>,
+          'absolute right-4 top-2 w-72 rounded-2xl bg-surface-container-lowest p-space-sm shadow-[0_24px_50px_-12px_rgba(8,8,8,0.12)] border border-outline-variant/40 transform rotate-4 hover:rotate-0 hover:scale-105 transition-all duration-500 z-10 text-left block'
+        )}
+      </div>
+
+      {/* Mobile Stacked Preview Cards (Displays BOTH Photo 1 and Photo 2 + Specimen Badge) */}
+      <div className="w-full flex flex-col gap-4 mt-8 md:hidden text-left">
+        {/* Mobile Specimen Header Anchor */}
+        <div className="w-full rounded-2xl bg-surface-container-lowest p-4 border border-outline-variant/30 shadow-sm">
+          <div className="flex items-center justify-between pb-1.5">
+            <span className="font-label-sm text-[11px] text-primary font-bold uppercase tracking-wider">
+              {specimenBadge}
+            </span>
+            <span className="font-label-sm text-[11px] text-secondary">
+              {specimenCounter}
             </span>
           </div>
-        </Link>
+          <h3 className="font-headline-md text-base font-semibold text-on-surface">
+            {specimenTitle}
+          </h3>
+          <p className="font-body-sm text-xs text-on-surface-variant mt-1">
+            {specimenSubtitle}
+          </p>
+        </div>
+
+        {/* Mobile Card Left (Photo 1) */}
+        {renderCardWrapper(
+          cardLeftLink,
+          <>
+            <div className="relative h-52 w-full rounded-xl overflow-hidden bg-surface-container">
+              <img
+                className="w-full h-full object-cover"
+                alt={cardLeftTitle}
+                src={cardLeftImage}
+              />
+              <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md">
+                <span className="font-label-sm text-[10px] text-primary uppercase font-bold tracking-wider">
+                  Showcase 01
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center justify-between p-2 pt-3">
+              <div>
+                <h3 className="font-headline-sm text-base font-semibold text-on-surface">
+                  {cardLeftTitle}
+                </h3>
+                <p className="font-body-sm text-xs text-on-surface-variant">
+                  {cardLeftSubtitle}
+                </p>
+              </div>
+              <span className="w-8 h-8 rounded-full bg-secondary-container/50 flex items-center justify-center text-primary shrink-0">
+                <span className="material-symbols-outlined text-[18px]">north_east</span>
+              </span>
+            </div>
+          </>,
+          'w-full rounded-2xl bg-surface-container-lowest p-3 shadow-[0_16px_32px_-12px_rgba(8,8,8,0.06)] border border-outline-variant/30 overflow-hidden text-left block'
+        )}
+
+        {/* Mobile Card Right (Photo 2) */}
+        {renderCardWrapper(
+          cardRightLink,
+          <>
+            <div className="relative h-52 w-full rounded-xl overflow-hidden bg-surface-container">
+              <img
+                className="w-full h-full object-cover"
+                alt={cardRightTitle}
+                src={cardRightImage}
+              />
+              <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md">
+                <span className="font-label-sm text-[10px] text-primary uppercase font-bold tracking-wider">
+                  Showcase 02
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center justify-between p-2 pt-3">
+              <div>
+                <h3 className="font-headline-sm text-base font-semibold text-on-surface">
+                  {cardRightTitle}
+                </h3>
+                <p className="font-body-sm text-xs text-on-surface-variant">
+                  {cardRightSubtitle}
+                </p>
+              </div>
+              <span className="w-8 h-8 rounded-full bg-secondary-container/50 flex items-center justify-center text-primary shrink-0">
+                <span className="material-symbols-outlined text-[18px]">north_east</span>
+              </span>
+            </div>
+          </>,
+          'w-full rounded-2xl bg-surface-container-lowest p-3 shadow-[0_16px_32px_-12px_rgba(8,8,8,0.06)] border border-outline-variant/30 overflow-hidden text-left block'
+        )}
       </div>
     </section>
   );

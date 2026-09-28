@@ -48,6 +48,20 @@ export interface ToolItem {
   icon: string;
 }
 
+export interface HeroCard {
+  image?: string;
+  title?: string;
+  subtitle?: string;
+  link?: string;
+}
+
+export interface HeroSpecimen {
+  badge?: string;
+  counter?: string;
+  title?: string;
+  subtitle?: string;
+}
+
 export interface SiteSettings {
   id: string;
   site_name: string;
@@ -63,6 +77,9 @@ export interface SiteSettings {
   location: string;
   avatar_url?: string;
   toolkit?: ToolItem[];
+  hero_card_left?: HeroCard;
+  hero_card_right?: HeroCard;
+  hero_specimen?: HeroSpecimen;
   social_links: { platform: string; url: string }[];
   services_list: {
     id: string;

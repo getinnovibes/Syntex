@@ -20,6 +20,24 @@ export const INITIAL_SITE_SETTINGS: SiteSettings = {
     { name: 'Figma', icon: 'dashboard_customize' },
     { name: 'After Effects', icon: 'animation' },
   ],
+  hero_card_left: {
+    image: '/assets/aura-stationery.png',
+    title: 'Aura Creative',
+    subtitle: 'Identity System • 2024',
+    link: '/projects/aura-creative-system',
+  },
+  hero_card_right: {
+    image: '/assets/synthesis-poster.png',
+    title: 'Synthesis Exhibition',
+    subtitle: 'Print & Motion • 2024',
+    link: '/projects/synthesis-exhibition',
+  },
+  hero_specimen: {
+    badge: 'Live Specimen',
+    counter: '01 / 05 Curated',
+    title: 'Typographic Systems & Spatial Balance',
+    subtitle: 'Harmonizing brand narrative with architectural layout structures.',
+  },
   social_links: [
     { platform: 'Behance', url: 'https://www.behance.net/happycrust' },
     { platform: 'Dribbble', url: 'https://dribbble.com' },

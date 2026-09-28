@@ -551,6 +551,24 @@ export async function fetchSiteSettings(): Promise<SiteSettings> {
           } catch {}
         }
 
+        const metaHeroLeftRaw = rawSocial.find((l: any) => l.platform === '__meta_hero_card_left__')?.url;
+        let metaHeroLeft: any;
+        if (metaHeroLeftRaw) {
+          try { metaHeroLeft = JSON.parse(metaHeroLeftRaw); } catch {}
+        }
+
+        const metaHeroRightRaw = rawSocial.find((l: any) => l.platform === '__meta_hero_card_right__')?.url;
+        let metaHeroRight: any;
+        if (metaHeroRightRaw) {
+          try { metaHeroRight = JSON.parse(metaHeroRightRaw); } catch {}
+        }
+
+        const metaHeroSpecimenRaw = rawSocial.find((l: any) => l.platform === '__meta_hero_specimen__')?.url;
+        let metaHeroSpecimen: any;
+        if (metaHeroSpecimenRaw) {
+          try { metaHeroSpecimen = JSON.parse(metaHeroSpecimenRaw); } catch {}
+        }
+
         const cleanSocialLinks = rawSocial.filter((l: any) => !l.platform.startsWith('__meta_'));
 
         const merged: SiteSettings = {
@@ -563,6 +581,9 @@ export async function fetchSiteSettings(): Promise<SiteSettings> {
               ? metaToolkit
               : local.toolkit,
           avatar_url: data.avatar_url || metaAvatar || local.avatar_url || '/assets/portrait.png',
+          hero_card_left: data.hero_card_left || metaHeroLeft || local.hero_card_left,
+          hero_card_right: data.hero_card_right || metaHeroRight || local.hero_card_right,
+          hero_specimen: data.hero_specimen || metaHeroSpecimen || local.hero_specimen,
         };
         setLocalSettings(merged);
         return merged;
@@ -587,12 +608,15 @@ export async function saveSiteSettings(settings: Partial<SiteSettings>): Promise
     (l) => !l.platform.startsWith('__meta_')
   );
 
-  // Encode avatar_url and toolkit into social_links metadata so it always persists to Supabase
-  // even if avatar_url / toolkit columns don't exist in PostgreSQL table yet!
+  // Encode avatar_url, toolkit, and hero showcase cards into social_links metadata
+  // so they always persist to Supabase even without DB migration
   const socialLinksWithMeta = [
     ...realSocialLinks,
     ...(merged.avatar_url ? [{ platform: '__meta_avatar_url__', url: merged.avatar_url }] : []),
     ...(merged.toolkit ? [{ platform: '__meta_toolkit__', url: JSON.stringify(merged.toolkit) }] : []),
+    ...(merged.hero_card_left ? [{ platform: '__meta_hero_card_left__', url: JSON.stringify(merged.hero_card_left) }] : []),
+    ...(merged.hero_card_right ? [{ platform: '__meta_hero_card_right__', url: JSON.stringify(merged.hero_card_right) }] : []),
+    ...(merged.hero_specimen ? [{ platform: '__meta_hero_specimen__', url: JSON.stringify(merged.hero_specimen) }] : []),
   ];
 
   // 1. Immediately persist to resilient local cache

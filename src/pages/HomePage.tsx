@@ -73,6 +73,9 @@ export const HomePage: React.FC = () => {
           availabilityStatus={settings?.availability_status}
           toolkit={settings?.toolkit}
           featuredProjects={projects.filter((p) => p.featured)}
+          heroCardLeft={settings?.hero_card_left}
+          heroCardRight={settings?.hero_card_right}
+          heroSpecimen={settings?.hero_specimen}
         />
 
         <AboutSection settings={settings || undefined} />
